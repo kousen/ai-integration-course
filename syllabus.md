@@ -67,7 +67,7 @@ The course uses several free courses from [Claude Academy](https://anthropic.ski
 | Introduction to Model Context Protocol | Week 8 | Week 9 |
 | Introduction to Subagents *or* Introduction to Agent Skills | Week 10 | Week 11 |
 
-Recommended but not required: Claude Code in Action, Building with the Claude API, Model Context Protocol: Advanced Topics.
+Recommended but not required: Claude Code in Action, Building with the Claude API, Model Context Protocol: Advanced Topics. Trinity's own non-credit [AI Literacy for All](https://www.trincoll.edu/academic-ai/students/) course, which awards a LinkedIn badge, may be submitted in place of the AI Fluency for Students certificate.
 
 Reference for the working method: [The AI-Native SDLC Playbook](https://claude.com/blog/the-ai-native-sdlc-playbook) (Anthropic, August 2026).
 
@@ -85,7 +85,7 @@ Every student needs a laptop with a code editor (VS Code recommended), Git, and 
 - Model choice is a design decision, like language choice. Your `spec.md` states which model each component uses and why, and the course expects you to compare a cheap model against a frontier one on real tasks before deciding.
 - Students who already have a Claude Pro or Max subscription can use it directly and skip OpenRouter.
 - The instructor is pursuing Google Cloud credits for the class. If they come through, they supplement OpenRouter for the vision, image, and audio weeks. Nothing in the course depends on them.
-- The college also provides BoodleBox. It may be useful for casual chat but is not a substitute for API or harness access.
+- The college provides BoodleBox as its secure environment for everyday AI use, and it is a good choice for reading, brainstorming, and chat. This course also requires direct API access because building software on AI services is the subject of the course. That access runs through accounts you create and pay for yourself, and the only data that passes through them is code and content you choose to publish. Do not send college data, other people's personal information, or anything covered by Trinity's [AI and data privacy guidance](https://www.trincoll.edu/lits/technology/security/best-practices/ai-data-privacy/) through any external AI service.
 
 All generated media and API usage must stay within the acceptable-use guidelines in the Responsible AI section below.
 
@@ -315,6 +315,8 @@ Students must still:
 - Distinguish useful output from wrong output
 - Keep the artifact chain honest: intent and spec written before code, plans approved before implementation
 - Not present unexamined AI output as if it were automatically correct
+
+This policy is the course-specific statement that Trinity asks every instructor to provide. It sits inside the college's [AI and Academic Integrity guidelines](https://www.trincoll.edu/academic-ai/students/academic-integrity/) on the [Academic AI site](https://www.trincoll.edu/academic-ai/), which every student should read. Where this syllabus permits more AI use than another course does, that permission applies only here.
 
 ---
 
