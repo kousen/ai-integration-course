@@ -35,9 +35,9 @@ Ken will choose the break time based on how the class is progressing.
 
 ## After class
 
-**Due Monday, September 21, at 1:30 PM:** the [Week 1 submission](../../assignments/week01-first-agent-session.md), your Claude Code 101 certificate, and the Academic Honesty Pledge on Moodle. Read the syllabus before submitting the pledge. The **AI Fluency for Students** certificate is due September 28 at 1:30 PM; the syllabus also permits Trinity's AI Literacy for All badge in its place.
+**Due Monday, September 21, at 1:30 PM:** the [Week 1 submission](../../assignments/week01-first-agent-session.md), your [Claude Code 101](https://academy.claude.com/courses/claude-code-101) certificate, and the Academic Honesty Pledge on Moodle. Read the syllabus before submitting the pledge. The **[AI Fluency for Students](https://academy.claude.com/courses/ai-fluency-for-students)** certificate is due September 28 at 1:30 PM; the syllabus also permits Trinity's AI Literacy for All badge in its place.
 
-For the certificates, use the course links in Moodle and the [Claude Academy course catalog](https://academy.claude.com/). Upload certificates as PDFs to their separate Moodle assignments.
+For the certificates, use the course links in Moodle and the [Claude Academy course catalog](https://academy.claude.com/). Upload completion evidence as PDFs to the separate Moodle assignments. If Academy provides a badge or a completed course page instead of a downloadable certificate, save that page as a PDF.
 
 ### Reading to support the work
 

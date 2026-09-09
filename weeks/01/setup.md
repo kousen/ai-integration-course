@@ -8,12 +8,14 @@ We will do this together in class. Stop at a checkpoint if something fails and s
 
 Open [GitHub](https://github.com/) and sign in or create an account. Keep a browser tab signed in. Your source code will be shared; use the supplied public-domain poem rather than personal information.
 
-Open [OpenRouter](https://openrouter.ai/) and create or sign in to your own account. The classroom candidate is [`minimax/minimax-m3`](https://openrouter.ai/minimax/minimax-m3), which uses pay-as-you-go API billing. Ken has confirmed an interactive response through `orclaude`; use the model he announces in class, with the spending cap below.
+Open [OpenRouter](https://openrouter.ai/) and create or sign in to your own account. The classroom candidate is [`minimax/minimax-m3`](https://openrouter.ai/minimax/minimax-m3), which uses pay-as-you-go API billing. It completed a plan/build/change rehearsal through `orclaude`, and the resulting trainer passed browser behavior checks; use the model he announces in class, with the spending cap below.
 
 - For paid access, the syllabus budgets an initial **$20 credit purchase** and roughly **$50 for the semester**, both planning estimates rather than promises of actual cost. Confirm the checkout total before buying; fees may apply.
 - Create a course key at [API keys](https://openrouter.ai/settings/keys). Give it a recognizable name such as `cpsc415`. Set a **$5 spending limit for the initial lab** and no recurring reset if the interface offers that choice. The cap belongs to this key; your account balance is separate. Review usage before deciding whether to raise it for later work.
 - If payment or account access is a problem, tell Ken privately. Pair for the activity while he helps resolve access. Do not exchange API keys or buy a subscription as a troubleshooting step.
 - Free models may be usable, but have request and availability limits. A single agent task can make many requests. Ken will select the day's default and fallback; do not silently switch to a more expensive model.
+
+**Instructor fallback:** `xiaomi/mimo-v2.5` also completed a trainer build and browser checks during preparation. Both routes are API-billed; use the fallback only when directed, with your spending cap in place. One successful rehearsal does not guarantee service availability during class.
 
 Copy your API key only into the hidden terminal prompt in Step 4. Never put it in a chat prompt, source file, screenshot, or Git commit. This guide keeps it in the current terminal session rather than writing it to a file.
 
@@ -163,6 +165,10 @@ There are 14 lines. In your browser, open [OpenRouter Activity](https://openrout
 ### Starting again later
 
 Open your `lyrics-trainer` folder in a terminal. In a new terminal, repeat the hidden key-entry commands above. Use the same launcher with the selected model; add `--continue` if you want to resume the most recent session in that folder. Typing plain `claude` does not apply this wrapper's settings.
+
+### Unknown-model context warning
+
+Claude Code may say an OpenRouter model is not described by its built-in catalog and assume a 200,000-token context window. That metadata warning alone does not mean the connection failed. Keep the default for this small lab. For a model whose published window supports it, the launcher also passes a quoted `[1m]` suffix through unchanged, for example `orclaude "deepseek/deepseek-v4-pro-0813[1m]"`. Keep the quotes in zsh. Ask Ken before changing context limits; do not disable enforcement as a troubleshooting shortcut.
 
 ## If something goes wrong
 
