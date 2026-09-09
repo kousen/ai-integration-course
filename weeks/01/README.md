@@ -17,8 +17,7 @@ By the end of the session, you should be able to:
 1. [Setup guide: Mac and Windows](setup.md)
 2. [Lab: Build, change, and check a memorization trainer](lab.md)
 3. [Text for the lab: Sonnet 18](sonnet18.txt)
-4. [Week 1 PDF review preview](../../slides/week01.pdf) · [Slide source](../../slides/week01.md)
-   The PDF predates the latest slide-review edits; use the Slidev source for the current version.
+4. [Week 1 slides (PDF)](../../slides/week01.pdf) · [Slide source](../../slides/week01.md)
 5. [Submission requirements](../../assignments/week01-first-agent-session.md)
 
 ## Our afternoon

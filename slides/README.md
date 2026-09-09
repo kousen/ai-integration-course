@@ -2,10 +2,10 @@
 
 Slidev Markdown sources and exported PDFs. The shared light theme follows the blue/amber palette used in Senior Seminar, with locally available fonts for projection.
 
-- [Week 1 source — current review version](week01.md)
-- [Week 1 PDF — earlier review preview](week01.pdf)
+- [Week 1 Slidev source](week01.md)
+- [Week 1 PDF](week01.pdf)
 
-The source is authoritative during the slide review. The PDF has not been regenerated for the latest billing, break-slide, and `lyrics.txt` edits; export it when the review is finished.
+The PDF matches the reviewed 28-slide source, including API-billed MiniMax M3, discretionary break timing, and `lyrics.txt` in student projects.
 
 With Slidev and the Seriph theme installed, run from this directory:
 

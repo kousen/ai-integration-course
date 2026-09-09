@@ -34,4 +34,4 @@ Major project submissions are Git repositories you own, created from the [artifa
 
 **[Week 1: Start here](weeks/01/README.md)** — in-class setup, first build, behavior checks, slides, and submission instructions. No preparation beyond a laptop is assumed. Week 1 uses a minimal repository rather than the full artifact template.
 
-[Setup guide](weeks/01/setup.md) · [Lab](weeks/01/lab.md) · [Current slides](slides/week01.md) · [Earlier PDF preview](slides/week01.pdf) · [Submission](assignments/week01-first-agent-session.md)
+[Setup guide](weeks/01/setup.md) · [Lab](weeks/01/lab.md) · [Current slides](slides/week01.md) · [Slides (PDF)](slides/week01.pdf) · [Submission](assignments/week01-first-agent-session.md)
