@@ -4,7 +4,7 @@
 
 ## CPSC 415-01: Special Topics — AI Integration, Fall 2026
 
-*Current revision: September 4, 2026 (supersedes the April 17 draft)*
+*Current revision: September 9, 2026 (supersedes the April 17 draft)*
 
 **Lectures:** Mondays, 1:30 PM – 4:10 PM\
 **Room:** MC-225\
@@ -27,9 +27,9 @@ AI Integration is a project-based course on building software that uses commerci
 
 Two ideas run through the whole semester.
 
-**First, you will build everything with a coding agent.** From the first week, students work inside a coding agent (Claude Code, run against the model of their choice). The agent writes most of the code. Your job is to decide what gets built, steer the agent, verify the result, and be able to explain every choice. Because the agent handles syntax, you are free to build in any programming language, including ones you have never seen. Everyone arrives with Java from CPSC 215, so Java is the shared baseline and any other language counts as new. Choosing a language becomes a design decision you justify, not a limitation you work around.
+**First, you will build everything with a coding agent.** From the first week, students work inside a coding agent (Claude Code, run against the model of their choice). The agent writes most of the code. Your job is to decide what gets built, steer the agent, verify the result, and be able to explain every choice. Because the agent handles syntax, you are free to build in any programming language, including ones you have never seen. Students arrive with some Python from Intro Computing and Java from CPSC 215. Experience with object-oriented design varies, depending in part on whether they have taken Software Design. Choosing a language becomes a design decision you justify, not a limitation you work around.
 
-**Second, you will work the way AI-native teams work.** Anthropic's *AI-Native SDLC Playbook* (August 2026) describes a software development life cycle in which every stage produces a short, version-controlled artifact: an intent file, a spec, a plan, tests, a reviewed pull request, and a maintenance loop that feeds back into new intent. This course adopts that artifact chain as its working method. Every assignment is submitted as a chain of artifacts plus the code, and grading looks at the chain as much as the code. The chain is how you prove you understood what the agent built.
+**Second, you will work the way AI-native teams work.** Anthropic's *AI-Native SDLC Playbook* (August 2026) describes a software development life cycle in which every stage produces a short, version-controlled artifact: an intent file, a spec, a plan, tests, a reviewed pull request, and a maintenance loop that feeds back into new intent. This course adopts that artifact chain as its working method. Major projects are submitted as a chain of artifacts plus the code, and grading looks at the chain as much as the code. Early labs introduce these artifacts gradually, with requirements stated on each assignment sheet. The chain is how you prove you understood what the agent built.
 
 Specific vendors and models will change during the semester as the field evolves. The emphasis is on transferable patterns.
 
@@ -55,7 +55,7 @@ By the end of the course, students should be able to:
 
 ## Required Texts and Online Courses
 
-There is no required textbook. Readings (vendor documentation, blog posts, and papers) are posted on Moodle each week.
+There is no textbook purchase or O’Reilly subscription requirement. Selected draft chapters from Ken Kousen’s *Claude Code: Up and Running* will be shared privately through Moodle. Public readings, examples, and lab handouts are linked from the course repository; slides are also posted to Moodle.
 
 The course uses several free courses from [Claude Academy](https://anthropic.skilljar.com/). Each awards a completion certificate, and certificates are a graded component (see below). Required:
 
@@ -75,16 +75,16 @@ Reference for the working method: [The AI-Native SDLC Playbook](https://claude.c
 
 ## Computing Resources
 
-Every student needs a laptop with a code editor (VS Code recommended), Git, and a coding agent. The course standardizes on the Claude Code harness because it is the reference implementation for skills, MCP, hooks, and subagents. You do not need a Claude subscription to run it.
+Every student needs a laptop with a code editor (VS Code recommended), Git, and a coding agent. The initial classroom setup uses Claude Code with the instructor’s `orclaude` launcher. Codex and other harnesses provide additional examples and may be used with instructor guidance. You do not need a Claude subscription to run it.
 
 **Model access.** Students access models through [OpenRouter](https://openrouter.ai/), a prepaid, pay-as-you-go gateway to models from Anthropic, OpenAI, Google, and others. Week 1 covers setup, including a launcher script that points Claude Code at any OpenRouter model. Key points:
 
-- OpenRouter is prepaid, so you cannot spend more than you load. Load $20 to start and expect to spend roughly $50 over the semester. Set a spend limit on your API key.
-- OpenRouter lists more than 500 models, including the major Chinese open-weight models (GLM, Kimi, DeepSeek, Qwen), many of which cost pennies per million tokens. Use one of these during the first two weeks while you learn the tool and make mistakes. Switch to Claude Sonnet for the artifact-chain work that starts in Week 3. Reserve Opus-class models for planning and review.
+- Use the model selected in class, with a spending cap. If a suitable free model is available it may be used; for paid access, the planning budget is $20 initially and roughly $50 over the semester, not a guarantee of actual cost; purchase fees may apply. Set a spending limit on your course API key and check usage. If payment or access is a problem, speak with the instructor so we can arrange a completion path.
+- The instructor will select a model and fallback for each classroom activity based on rehearsal, current availability, and cost. The Week 1 candidate is `minimax/minimax-m3`, using pay-as-you-go API billing. Free endpoints have request limits; a successful chat response alone does not establish reliable agent tool use. There is no mandatory switch to a particular paid model in Week 3.
 - Local open-source models (via Ollama or equivalent) are covered in Week 2 and are a legitimate zero-cost choice for any component where they are good enough.
 - Model choice is a design decision, like language choice. Your `spec.md` states which model each component uses and why, and the course expects you to compare a cheap model against a frontier one on real tasks before deciding.
 - Students who already have a Claude Pro or Max subscription can use it directly and skip OpenRouter.
-- The instructor is pursuing Google Cloud credits for the class. If they come through, they supplement OpenRouter for the vision, image, and audio weeks. Nothing in the course depends on them.
+- Possible Claude Enterprise access is not yet confirmed. If provided, its student access and usage terms will be explained before use. The instructor is pursuing Google Cloud credits for the class. If they come through, they supplement OpenRouter for the vision, image, and audio weeks. Nothing in the course depends on them.
 - The college provides BoodleBox as its secure environment for everyday AI use, and it is a good choice for reading, brainstorming, and chat. This course also requires direct API access because building software on AI services is the subject of the course. That access runs through accounts you create and pay for yourself, and the only data that passes through them is code and content you choose to publish. Do not send college data, other people's personal information, or anything covered by Trinity's [AI and data privacy guidance](https://www.trincoll.edu/lits/technology/security/best-practices/ai-data-privacy/) through any external AI service.
 
 All generated media and API usage must stay within the acceptable-use guidelines in the Responsible AI section below.
@@ -104,11 +104,11 @@ All generated media and API usage must stay within the acceptable-use guidelines
 
 ### Notes on grading
 
-**Everything is submitted as an artifact chain.** A submission is a Git repository containing, at minimum, `intent/`, `spec.md`, `plan.md`, tests, and a pull request history. The rubric for each assignment weights the chain and the code roughly equally. Working code with no chain, or a chain the student cannot explain, earns at most half credit.
+**Major projects are submitted as an artifact chain.** Team projects and the final portfolio include `intent/`, `spec.md`, `plan.md`, tests, and a pull request history. Their rubrics weight the chain and the code roughly equally. Working code with no required chain, or a chain the student cannot explain, earns at most half credit on those projects. Early labs require only the artifacts introduced so far: Week 1 uses a working app, manual checks, a short explanation, and commits; formal intent starts in Week 2, spec in Week 3, written implementation plans in Week 4, automated checks in Week 5, and reviewed pull requests in Week 6. Certificates and the pledge are separate Moodle submissions.
 
 **Teams.** With 10–11 students, expect four teams of 2–3. Teams are formed in Week 3 and may stay together for both team projects or re-form in Week 8. Every team member must be able to explain every part of the submission.
 
-**The new-language requirement.** Your portfolio must include at least one component written in a programming language you had never used before this course, chosen and justified in its `spec.md`. Java does not qualify. Python is the obvious candidate, since the Claude Academy MCP course and most vendor examples use it, but TypeScript, Go, Kotlin, Rust, or anything else is welcome. The four-question annotation (below) for that component must include what you learned about reading unfamiliar code.
+**Language choice and unfamiliar code.** Choose languages appropriate to your projects and explain your choices in `spec.md`; Java and Python are both permitted. Complete one guided exercise during the course using agent-generated code in a language you have not previously used. The exercise assesses how you run, inspect, change, and verify unfamiliar code; it is not an additional portfolio-component requirement. Its handout will specify timing and evidence.
 
 **The four-question annotation.** Every project in the portfolio, and every team project, is annotated with:
 
@@ -154,11 +154,11 @@ Two files travel with every repo: `CLAUDE.md` (team conventions, commands, commo
 **The landscape, the toolchain, and your first agent session**
 
 - Course overview, expectations, and why the course is structured around coding agents and the artifact chain
-- Survey of frontier providers (Anthropic, OpenAI, Google) and what each is good at right now
+- Brief model/harness/application distinction, tokenizer demonstration, and cost per accepted result
 - Responsible AI module: bias, provenance, safety filters, synthetic media, acceptable use of course credentials
-- Setup lab: Git and GitHub, VS Code, OpenRouter account and key with a spend limit, Claude Code, the launcher script, a near-free model for practice
-- First live session: have the agent write the same "hello, model" API call in Java and in two languages you have never used, then read all three
-- **Assigned:** Claude Code 101 (certificate due Week 2), AI Fluency for Students (due Week 3), setup checklist
+- In-class setup from a laptop: Git and GitHub, OpenRouter account and key with a spend limit, Claude Code, and the launcher. VS Code is optional on Day 1; no prior installation is assumed.
+- First live session and lab: build a single-file memorization trainer, choose one improvement, check its behavior, explain a piece of code, and save the result in Git. The agent calls a model; the app itself makes no AI calls yet.
+- **Assigned:** Week 1 first-agent-session submission and Claude Code 101 certificate (both due Week 2); AI Fluency for Students (due Week 3); Academic Honesty Pledge (due Week 2).
 
 ---
 
@@ -170,8 +170,8 @@ Two files travel with every repo: `CLAUDE.md` (team conventions, commands, commo
 - Chat APIs: system prompts, roles, parameters, streaming, token counting, cost
 - Local open-source models: running one with Ollama, pointing the same client and the same coding agent at it, and seeing where it falls short
 - *Chain stage: Plan.* The discovery interview. The agent asks you questions until it can write `intent.md`; you correct it
-- **Lab:** write the intent for a small chat client, then have the agent build it in Java and port it to a language you have never used. Compare the two. Run the same build once on a pennies-per-million model and once on Claude Sonnet, and note what differed.
-- **Due:** Claude Code 101 certificate
+- **Lab:** write the intent for a small chat client, then have the agent build it in Java or Python. Inspect and verify the API call. Compare model behavior and cost using the access routes available to the class. The separate guided unfamiliar-language exercise may begin here if time permits.
+- **Due:** Week 1 first-agent-session submission, Claude Code 101 certificate, and Academic Honesty Pledge
 
 ---
 

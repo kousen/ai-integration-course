@@ -13,8 +13,8 @@ A project-based course on building software that uses commercial AI services as 
 
 Two ideas run through the semester:
 
-1. **You build everything with a coding agent**, in any language you choose. Java is the shared baseline from CPSC 215; anything else counts as new, and your portfolio must include at least one component in a language you had never used.
-2. **You work the way AI-native teams work.** Every assignment is submitted as a chain of artifacts (intent, spec, plan, tests, pull request) alongside the code, following Anthropic's [AI-Native SDLC Playbook](https://claude.com/blog/the-ai-native-sdlc-playbook). The chain is graded as much as the code.
+1. **You build everything with a coding agent**, in any language you choose. Python and Java are the shared starting background. Justify project language choices; one guided exercise explores an unfamiliar language.
+2. **You work the way AI-native teams work.** Major projects are submitted as a chain of artifacts (intent, spec, plan, tests, pull request) alongside the code, following Anthropic's [AI-Native SDLC Playbook](https://claude.com/blog/the-ai-native-sdlc-playbook). The chain is graded as much as the code. Early labs introduce the stages gradually.
 
 ## Repository layout
 
@@ -23,12 +23,15 @@ Two ideas run through the semester:
 | `syllabus.md` | The syllabus. Source of truth for dates, grading, and policies. |
 | `scripts/` | The `orclaude` launcher that points Claude Code at any OpenRouter model, plus the Windows version, a smoke test, and a settings example. Copied from the [book examples](https://github.com/kousen/claude-code-up-and-running-examples/tree/main/scripts). |
 | `weeks/` | Weekly lab handouts and readings, added as the semester goes. |
-| `assignments/` | Assignment sheets and the artifact-chain rubric. |
+| `assignments/` | Assignment sheets. The Week 1 sheet is available; project rubrics follow. |
+| `slides/` | Weekly Slidev sources and PDF exports. |
 
 ## Submitting work
 
-Every submission is a Git repository you own, created from the [artifact-chain template](https://github.com/kousen/artifact-chain-template). On Moodle you submit the repository URL and a git tag. Certificates from Claude Academy are uploaded as PDFs.
+Major project submissions are Git repositories you own, created from the [artifact-chain template](https://github.com/kousen/artifact-chain-template). On Moodle you submit the repository URL and a git tag. Certificates from Claude Academy are uploaded as PDFs.
 
 ## Setup
 
-The Week 1 setup checklist will live in `weeks/01/`. Short version: Git and GitHub, VS Code, an OpenRouter account with a spend limit on the key, Claude Code, and the launcher in `scripts/`.
+**[Week 1: Start here](weeks/01/README.md)** — in-class setup, first build, behavior checks, slides, and submission instructions. No preparation beyond a laptop is assumed. Week 1 uses a minimal repository rather than the full artifact template.
+
+[Setup guide](weeks/01/setup.md) · [Lab](weeks/01/lab.md) · [Current slides](slides/week01.md) · [Earlier PDF preview](slides/week01.pdf) · [Submission](assignments/week01-first-agent-session.md)
