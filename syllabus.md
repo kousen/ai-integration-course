@@ -17,7 +17,7 @@
 
 **Instructor:** [Ken Kousen](https://internet3.trincoll.edu/FacProfiles/Default.aspx?fid=1000576)\
 **Email:** [kkousen@trincoll.edu](mailto:kkousen@trincoll.edu)\
-**Office hours:** Thursdays, 10:00 AM – 12:00 PM, MECC 175
+**Office hours:** Tuesdays, 10:00 AM – 12:00 PM, MECC 175, or by appointment (I am on campus all day Mondays and Tuesdays)
 
 ---
 
