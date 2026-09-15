@@ -22,8 +22,8 @@ Two ideas run through the semester:
 |---|---|
 | `syllabus.md` | The syllabus. Source of truth for dates, grading, and policies. |
 | `scripts/` | The `orclaude` launcher that points Claude Code at any OpenRouter model, plus the Windows version, a smoke test, and a settings example. Copied from the [book examples](https://github.com/kousen/claude-code-up-and-running-examples/tree/main/scripts). |
-| `weeks/` | Weekly lab handouts and readings, added as the semester goes. |
-| `assignments/` | Assignment sheets. The Week 1 sheet is available; project rubrics follow. |
+| `weeks/` | Weekly lab handouts and readings, added as the semester goes. Weeks 1 and 2 are available. |
+| `assignments/` | Assignment sheets. Week 1 and Week 2 sheets are available; project rubrics follow. |
 | `slides/` | Weekly Slidev sources and PDF exports. |
 
 ## Submitting work
@@ -35,3 +35,7 @@ Major project submissions are Git repositories you own, created from the [artifa
 **[Week 1: Start here](weeks/01/README.md)** — in-class setup, first build, behavior checks, slides, and submission instructions. No preparation beyond a laptop is assumed. Week 1 uses a minimal repository rather than the full artifact template.
 
 [Setup guide](weeks/01/setup.md) · [Lab](weeks/01/lab.md) · [Current slides](slides/week01.md) · [Slides (PDF)](slides/week01.pdf) · [Submission](assignments/week01-first-agent-session.md)
+
+**[Week 2](weeks/02/README.md)** — inside the harness, your first API call from your own program, and the discovery interview that produces the first intent file. Repositories start from the artifact-chain template.
+
+[Setup additions](weeks/02/setup.md) · [Lab](weeks/02/lab.md) · [Slides](slides/week02.md) · [Slides (PDF)](slides/week02.pdf) · [Submission](assignments/week02-chat-client.md)
