@@ -551,7 +551,7 @@ layout: center
 
 <div class="big">Compare. Choose. Refine.<br>Then check the behavior again.</div>
 
-<p class="note">Ken demonstrates Anthropic's <code>/design</code> using his own access.<br>This command is not part of the OpenRouter lab.</p>
+<p class="note">Prof. Kousen demonstrates Anthropic's <code>/design</code> using his own access.<br>This command is not part of the OpenRouter lab.</p>
 
 <!--
 Do not delay student setup for this. Prefer Week 2 if the class is full.
@@ -574,7 +574,7 @@ Alternative student exercise: request three UI descriptions in a normal prompt.
 - [Practical AI Literacy](https://github.com/kousen/practical-ai-literacy): tokenizer screenshots and cost/verification teaching material
 - [Tokenizer Playground](https://huggingface.co/spaces/Xenova/the-tokenizer-playground)
 - [Claude Code setup](https://code.claude.com/docs/en/setup) · [OpenRouter integration](https://openrouter.ai/docs/cookbook/coding-agents/claude-code-integration)
-- Shakespeare, Sonnet 18: public-domain lab text. Project-scale illustration from Ken's book, used for this course.
+- Shakespeare, Sonnet 18: public-domain lab text. Project-scale illustration from Prof. Kousen's book, used for this course.
 
 </div>
 

@@ -1,8 +1,8 @@
 # Week 1 setup: start with a laptop
 
-We will do this together in class. Stop at a checkpoint if something fails and show Ken the error. You do not need to buy a monthly Claude subscription. This guide uses your own OpenRouter account and the course's existing `orclaude` launcher.
+We will do this together in class. Stop at a checkpoint if something fails and show Prof. Kousen the error. You do not need to buy a monthly Claude subscription. This guide uses your own OpenRouter account and the course's existing `orclaude` launcher.
 
-**What you need today:** a browser, a terminal, Git, a GitHub account, Claude Code, and working model access. VS Code is useful but optional today. No Node.js, Python, JDK, Docker, WSL, or local model download is needed for the browser lab. Students who already use another supported environment should keep it; ask Ken for the matching commands.
+**What you need today:** a browser, a terminal, Git, a GitHub account, Claude Code, and working model access. VS Code is useful but optional today. No Node.js, Python, JDK, Docker, WSL, or local model download is needed for the browser lab. Students who already use another supported environment should keep it; ask Prof. Kousen for the matching commands.
 
 ## 1. Accounts and a small budget
 
@@ -12,8 +12,8 @@ Open [OpenRouter](https://openrouter.ai/) and create or sign in to your own acco
 
 - For paid access, the syllabus budgets an initial **$20 credit purchase** and roughly **$50 for the semester**, both planning estimates rather than promises of actual cost. Confirm the checkout total before buying; fees may apply.
 - Create a course key at [API keys](https://openrouter.ai/settings/keys). Give it a recognizable name such as `cpsc415`. Set a **$5 spending limit for the initial lab** and no recurring reset if the interface offers that choice. The cap belongs to this key; your account balance is separate. Review usage before deciding whether to raise it for later work.
-- If payment or account access is a problem, tell Ken privately. Pair for the activity while he helps resolve access. Do not exchange API keys or buy a subscription as a troubleshooting step.
-- Free models may be usable, but have request and availability limits. A single agent task can make many requests. Ken will select the day's default and fallback; do not silently switch to a more expensive model.
+- If payment or account access is a problem, tell Prof. Kousen privately. Pair for the activity while he helps resolve access. Do not exchange API keys or buy a subscription as a troubleshooting step.
+- Free models may be usable, but have request and availability limits. A single agent task can make many requests. Prof. Kousen will select the day's default and fallback; do not silently switch to a more expensive model.
 
 **Instructor fallback:** `xiaomi/mimo-v2.5` also completed a trainer build and browser checks during preparation. Both routes are API-billed; use the fallback only when directed, with your spending cap in place. One successful rehearsal does not guarantee service availability during class.
 
@@ -29,7 +29,7 @@ Open **Terminal** using Spotlight. Run these commands one at a time:
 git --version
 ```
 
-If macOS asks to install Command Line Developer Tools, accept the installation and let it finish. If installation stalls, show Ken rather than repeating it. If no installation prompt appears and Git is missing, run `xcode-select --install`. Reopen Terminal afterward and repeat `git --version`.
+If macOS asks to install Command Line Developer Tools, accept the installation and let it finish. If installation stalls, show Prof. Kousen rather than repeating it. If no installation prompt appears and Git is missing, run `xcode-select --install`. Reopen Terminal afterward and repeat `git --version`.
 
 Install Claude Code using the official native installer:
 
@@ -149,7 +149,7 @@ Remove-Variable courseKey
 & ..\ai-integration-course\scripts\orclaude.bat "minimax/minimax-m3"
 ```
 
-The commands use the API-billed MiniMax M3 candidate. If Ken selects another model, substitute its exact slug and keep the quotes. On the initial launch, complete any onboarding and trust **your exercise folder**. Keep normal permission prompts; do not enable bypass mode for this lab.
+The commands use the API-billed MiniMax M3 candidate. If Prof. Kousen selects another model, substitute its exact slug and keep the quotes. On the initial launch, complete any onboarding and trust **your exercise folder**. Keep normal permission prompts; do not enable bypass mode for this lab.
 
 Inside the session, run `/status`. Check the model and that the API destination is OpenRouter. Ask:
 
@@ -168,30 +168,30 @@ Open your `lyrics-trainer` folder in a terminal. In a new terminal, repeat the h
 
 ### Unknown-model context warning
 
-Claude Code may say an OpenRouter model is not described by its built-in catalog and assume a 200,000-token context window. That metadata warning alone does not mean the connection failed. Keep the default for this small lab. For a model whose published window supports it, the launcher also passes a quoted `[1m]` suffix through unchanged, for example `orclaude "deepseek/deepseek-v4-pro-0813[1m]"`. Keep the quotes in zsh. Ask Ken before changing context limits; do not disable enforcement as a troubleshooting shortcut.
+Claude Code may say an OpenRouter model is not described by its built-in catalog and assume a 200,000-token context window. That metadata warning alone does not mean the connection failed. Keep the default for this small lab. For a model whose published window supports it, the launcher also passes a quoted `[1m]` suffix through unchanged, for example `orclaude "deepseek/deepseek-v4-pro-0813[1m]"`. Keep the quotes in zsh. Ask Prof. Kousen before changing context limits; do not disable enforcement as a troubleshooting shortcut.
 
 ## If something goes wrong
 
 | Symptom | Next action |
 |---|---|
-| `git` or `claude` not found | Reopen the terminal, check PATH, and show Ken the installer output. |
+| `git` or `claude` not found | Reopen the terminal, check PATH, and show Prof. Kousen the installer output. |
 | “Set OPENROUTER_API_KEY” | Repeat hidden key entry in this terminal; never print the variable to check it. |
-| It asks for a paid Claude plan | Stop and check that you launched through `orclaude`, not plain `claude`. Ask Ken to inspect conflicting settings before changing account configuration. |
-| Model not found | Compare the exact slug with the catalog and ask Ken to check routing. |
+| It asks for a paid Claude plan | Stop and check that you launched through `orclaude`, not plain `claude`. Ask Prof. Kousen to inspect conflicting settings before changing account configuration. |
+| Model not found | Compare the exact slug with the catalog and ask Prof. Kousen to check routing. |
 | 401 / authentication failure | Check that the key is valid and that the wrapper ran; do not paste the key into the agent. |
 | 402 / insufficient credits | Check account balance and the course key's limit. Ask before buying more or raising a cap. |
 | 429 / rate limit | Pause; use the instructor's fallback when directed. Creating more keys is not a solution to an account limit. |
-| Git Bash not found on Windows | Verify Git for Windows is installed. Ken can check its installation path against the official setup guide. |
-| Browser sign-in/Git push fails | Keep the local commits; show Ken the error. You can complete the build without a working push. |
-| Managed laptop, unsupported OS, or no install permissions | Pair for the activity and arrange a supported environment with Ken. Do not disable institutional protections. |
+| Git Bash not found on Windows | Verify Git for Windows is installed. Prof. Kousen can check its installation path against the official setup guide. |
+| Browser sign-in/Git push fails | Keep the local commits; show Prof. Kousen the error. You can complete the build without a working push. |
+| Managed laptop, unsupported OS, or no install permissions | Pair for the activity and arrange a supported environment with Prof. Kousen. Do not disable institutional protections. |
 
-An existing Claude subscription or a confirmed Enterprise seat can be an alternative with Ken's help. A free Claude chat account alone is not this guide's access route. The optional instructor `/design` demonstration uses Anthropic access and is not required on OpenRouter.
+An existing Claude subscription or a confirmed Enterprise seat can be an alternative with Prof. Kousen's help. A free Claude chat account alone is not this guide's access route. The optional instructor `/design` demonstration uses Anthropic access and is not required on OpenRouter.
 
 ## Sources
 
-Installation and routing documentation checked September 9, 2026. Commands and service interfaces can change; Ken will rehearse the classroom setup before the session.
+Installation and routing documentation checked September 9, 2026. Commands and service interfaces can change; Prof. Kousen will rehearse the classroom setup before the session.
 
 - [Claude Code installation](https://code.claude.com/docs/en/setup) and [terminal guide](https://code.claude.com/docs/en/terminal-guide)
 - [OpenRouter with Claude Code](https://openrouter.ai/docs/cookbook/coding-agents/claude-code-integration)
 - [OpenRouter credit and rate limits](https://openrouter.ai/docs/api_reference/limits)
-- [Ken's companion launcher scripts](https://github.com/kousen/claude-code-up-and-running-examples/tree/main/scripts)
+- [Prof. Kousen's companion launcher scripts](https://github.com/kousen/claude-code-up-and-running-examples/tree/main/scripts)

@@ -33,7 +33,7 @@ By the end of the session, you should be able to:
 | 3:45–4:00 | Lab: verify the call, swap the model |
 | 4:00–4:10 | Save, tag, and preview Week 3 |
 
-Ken will choose the break time based on how the class is progressing.
+Prof. Kousen will choose the break time based on how the class is progressing.
 
 ## Due today at 1:30 PM
 
@@ -48,7 +48,7 @@ The Week 1 submission (repository URL and `week01-submitted` tag), the Claude Co
 - [OpenRouter quickstart](https://openrouter.ai/docs/quickstart): the request shape your client sends.
 - [Ollama's OpenAI compatibility](https://docs.ollama.com/openai): the same request shape at a local address.
 - [The AI-Native SDLC Playbook](https://claude.com/blog/the-ai-native-sdlc-playbook): the Plan stage is this week's chain stage.
-- Ken will share the harness and context chapters of his draft book through Moodle.
+- Prof. Kousen will share the harness and context chapters of his draft book through Moodle.
 
 ## What comes next
 

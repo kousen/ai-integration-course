@@ -31,7 +31,7 @@ Your program reads the API key from the `OPENROUTER_API_KEY` environment variabl
 
 ## 3. Optional: a local model
 
-A local model is not required. It needs a machine with at least 16 GB of memory for the smaller models, and the first download is several gigabytes. Ken will demonstrate one in class. If you want to try it, any of these serve the same style of chat endpoint on your own machine, so your client needs only a different base URL:
+A local model is not required. It needs a machine with at least 16 GB of memory for the smaller models, and the first download is several gigabytes. Prof. Kousen will demonstrate one in class. If you want to try it, any of these serve the same style of chat endpoint on your own machine, so your client needs only a different base URL:
 
 | Tool | What it is | Endpoint to try |
 |---|---|---|
@@ -47,6 +47,6 @@ Check each tool's current documentation for the exact port and flags; they chang
 |---|---|
 | `python3` or `java` not found after install | Open a new terminal so the PATH change applies |
 | `401` or `Unauthorized` from OpenRouter | The key variable is not set in this terminal; repeat the hidden prompt |
-| `402` or a credit message | Your OpenRouter balance or spend cap is exhausted; tell Ken |
+| `402` or a credit message | Your OpenRouter balance or spend cap is exhausted; tell Prof. Kousen |
 | Empty answer but tokens were used | The model spent its output budget on hidden reasoning; raise `max_tokens` or ask a shorter question |
 | Local model: connection refused | The server is not running; start the tool and retry |

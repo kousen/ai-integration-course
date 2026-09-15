@@ -558,7 +558,7 @@ commits and finishes after class with help.
 
 **Next week:** from intent to `spec.md`, structured output, a five-case eval, and **teams are formed**. Team Project 1 and the portfolio intent are assigned.
 
-<p class="note">Thinking about an Elting Center sandbox project instead? Tell Ken this week.</p>
+<p class="note">Thinking about an Elting Center sandbox project instead? Tell Prof. Kousen this week.</p>
 
 <!--
 4:04–4:08. The sandbox choice affects team formation next week, so collect

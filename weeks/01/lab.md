@@ -105,7 +105,7 @@ Do not add accounts, cloud deployment, databases, or an AI chatbot yet. Keep thi
 
 ## If setup is still blocked
 
-Work alongside a classmate and take turns directing and checking. Record whose environment you used. For an example to inspect, Ken can provide the [book's initial trainer](https://github.com/kousen/claude-code-up-and-running-examples/blob/main/lyrics-trainer/ch02-first-doghouse/index.html). Label that starting point honestly; do not claim the example was generated in your session. Contact Ken to resolve individual access before the next class.
+Work alongside a classmate and take turns directing and checking. Record whose environment you used. For an example to inspect, Prof. Kousen can provide the [book's initial trainer](https://github.com/kousen/claude-code-up-and-running-examples/blob/main/lyrics-trainer/ch02-first-doghouse/index.html). Label that starting point honestly; do not claim the example was generated in your session. Contact Prof. Kousen to resolve individual access before the next class.
 
 ## Sources
 

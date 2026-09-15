@@ -90,7 +90,7 @@ Record all of this in `CHECKS.md`:
 
 ## 4. Swap the model (10 minutes)
 
-Change only `CHAT_MODEL` to a second model Ken names in class, and ask the same question. Write down both answers and both costs from the Activity page. Then, if you have a local model running, change `CHAT_BASE_URL` to its address and set `CHAT_API_KEY` to any string (Ollama ignores it). Same code, different destination.
+Change only `CHAT_MODEL` to a second model Prof. Kousen names in class, and ask the same question. Write down both answers and both costs from the Activity page. Then, if you have a local model running, change `CHAT_BASE_URL` to its address and set `CHAT_API_KEY` to any string (Ollama ignores it). Same code, different destination.
 
 You are comparing what you observed for one question. That is not a benchmark, and you should not describe it as one in your README.
 
@@ -122,4 +122,4 @@ Ask the agent, without letting it edit, "What would you change about this progra
 
 ## If you are blocked
 
-Pair with a classmate and take turns interviewing and checking. Record whose environment you used. If OpenRouter access is the problem, tell Ken today so a path can be arranged before Week 3.
+Pair with a classmate and take turns interviewing and checking. Record whose environment you used. If OpenRouter access is the problem, tell Prof. Kousen today so a path can be arranged before Week 3.

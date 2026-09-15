@@ -31,7 +31,7 @@ By the end of the session, you should be able to:
 | 3:30–3:50 | Check the result and address a problem |
 | 3:50–4:10 | Save, explain, and prepare for next week |
 
-Ken will choose the break time based on how the class is progressing.
+Prof. Kousen will choose the break time based on how the class is progressing.
 
 ## After class
 
@@ -47,7 +47,7 @@ Read the setup guide and lab as you work. After class, revisit the corresponding
 - [The launcher scripts](https://github.com/kousen/claude-code-up-and-running-examples/tree/main/scripts): locate the selected model and destination API without exposing your key.
 - [Evaluate a tool yourself](https://github.com/kousen/practical-ai-literacy/blob/main/labs/lab6-evaluate-a-tool.md): read the method; a separate evaluation assignment will come later.
 
-Ken will share selected draft book readings through Moodle: Chapter 1, Chapter 2's lyrics-trainer section, and the OpenRouter portion of Chapter 11, “The Harness Is the Pattern.” These are supporting readings; an O'Reilly subscription is not required. The public guides above are sufficient to complete the lab.
+Prof. Kousen will share selected draft book readings through Moodle: Chapter 1, Chapter 2's lyrics-trainer section, and the OpenRouter portion of Chapter 11, “The Harness Is the Pattern.” These are supporting readings; an O'Reilly subscription is not required. The public guides above are sufficient to complete the lab.
 
 ## What comes later
 

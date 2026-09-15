@@ -20,7 +20,7 @@ Your repository should contain:
 
 ## Publish your repository
 
-On GitHub, create a **new empty repository** named `cpsc415-week01` under your account. Choose public visibility for this supplied-text exercise. Do not initialize it with a README, license, or .gitignore; those files already exist locally. If public sharing presents a concern, speak with Ken about access before uploading.
+On GitHub, create a **new empty repository** named `cpsc415-week01` under your account. Choose public visibility for this supplied-text exercise. Do not initialize it with a README, license, or .gitignore; those files already exist locally. If public sharing presents a concern, speak with Prof. Kousen about access before uploading.
 
 GitHub displays the repository's HTTPS URL. In your local `lyrics-trainer` directory, use it in place of the example:
 
@@ -30,7 +30,7 @@ git push -u origin main
 git push origin week01-submitted
 ```
 
-Complete Git's browser sign-in if offered. A GitHub account password is not a Git HTTPS credential; ask Ken for help if Git prompts for a password rather than a supported authentication flow. Do not put a token in the repository URL. If `origin` already exists, inspect `git remote -v` before changing anything.
+Complete Git's browser sign-in if offered. A GitHub account password is not a Git HTTPS credential; ask Prof. Kousen for help if Git prompts for a password rather than a supported authentication flow. Do not put a token in the repository URL. If `origin` already exists, inspect `git remote -v` before changing anything.
 
 Open the repository in a browser. Confirm the files and `week01-submitted` tag are visible. On Moodle, submit:
 
@@ -39,9 +39,9 @@ Repository: https://github.com/YOUR_USERNAME/cpsc415-week01
 Tag: week01-submitted
 ```
 
-If you discover a problem after tagging, ask Ken how to identify the corrected submission; do not silently move a tag already submitted.
+If you discover a problem after tagging, ask Prof. Kousen how to identify the corrected submission; do not silently move a tag already submitted.
 
-## What Ken will look for
+## What Prof. Kousen will look for
 
 | Evidence | Satisfactory for Week 1 |
 |---|---|
@@ -50,7 +50,7 @@ If you discover a problem after tagging, ask Ken how to identify the corrected s
 | Understanding | You can explain your change, a relevant piece of code, and the model/harness/app distinction. |
 | Submission | The files and tag can be located, with no credentials included. |
 
-Polished graphics are not the goal. Honest evidence of a small working process matters more. This checklist guides participation feedback; it does not create a new grade category or alter the syllabus weights. Tell Ken about installation or payment blockers promptly so you can arrange a completion path.
+Polished graphics are not the goal. Honest evidence of a small working process matters more. This checklist guides participation feedback; it does not create a new grade category or alter the syllabus weights. Tell Prof. Kousen about installation or payment blockers promptly so you can arrange a completion path.
 
 ## This week's artifact exception
 

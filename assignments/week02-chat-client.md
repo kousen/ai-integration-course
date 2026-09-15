@@ -16,9 +16,9 @@ Your repository, created from the artifact-chain template, should contain:
 - `README.md`: how to run it, your two intent corrections, one code explanation, the two-model comparison with observed costs, and any local-model note.
 - The template's other files, untouched or lightly edited. `spec.md` and `plan.md` are not required this week.
 
-**No API key belongs in the repository.** If a key appears in any commit, treat it as compromised, revoke it at OpenRouter, and tell Ken.
+**No API key belongs in the repository.** If a key appears in any commit, treat it as compromised, revoke it at OpenRouter, and tell Prof. Kousen.
 
-## What Ken will look for
+## What Prof. Kousen will look for
 
 | Evidence | Satisfactory for Week 2 |
 |---|---|
