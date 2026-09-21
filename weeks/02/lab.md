@@ -14,7 +14,17 @@ git clone https://github.com/YOUR_USERNAME/cpsc415-week02.git
 cd cpsc415-week02
 ```
 
-Leave `spec.md`, `plan.md`, and the other files alone. Only the `intent/` folder is required this week. Start the agent here with `orclaude` and the model announced in class.
+Leave `spec.md`, `plan.md`, and the other files alone. Only the `intent/` folder is required this week.
+
+The template's `CLAUDE.md` describes the full chain for major projects, and the agent reads it at the start of every session. Tell it which rules apply this week. Open `CLAUDE.md` and add these two lines under **Working rules**:
+
+```markdown
+- This is the Week 2 introductory lab. Only the intent stage is assigned:
+  no spec.md, no plan.md, no branches or pull requests. Commit to main.
+- Standard library only. No packages, no pip install, no Maven or Gradle.
+```
+
+Then start the agent here with `orclaude` and the model announced in class.
 
 ## 1. The discovery interview (10 minutes)
 
