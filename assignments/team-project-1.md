@@ -1,6 +1,6 @@
 # Team Project 1: Multimodal Web App
 
-**Assigned:** Monday, September 28, 2026. **Due:** Monday, November 2, 2026, 1:30 PM, on Moodle (group submission). Presentations in class that day.
+**Assigned:** Monday, September 28, 2026. **Due:** Monday, November 2, 2026, 1:30 PM, on Moodle (group submission: one member submits the repository URL and the tag `tp1-submitted`). Presentations in class that day.
 
 **Weight:** 15% of the course grade. Teams of 2–3.
 

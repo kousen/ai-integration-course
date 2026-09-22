@@ -2,7 +2,7 @@
 
 **Assigned:** Monday, September 28, 2026. **Final due:** Monday, December 14, 2026, 1:30 PM. **Weight:** 25% of the course grade, plus the Comprehension Defense (15%) is conducted over this repository.
 
-**First milestone: `intent/` and `spec.md` due Monday, October 5, 1:30 PM** (feedback only, not graded).
+**First milestone: `intent/` and `spec.md` due Monday, October 5, 1:30 PM**, submitted on Moodle as the repository URL plus the tag `intent-spec` (feedback only, not graded). The final submission is the repository URL, the tag `portfolio-final`, and the deployed site's URL.
 
 ## What this is
 
@@ -28,11 +28,11 @@ Every project in the profile answers: **What is this?** **Why this choice?** **W
 
 | Date | Milestone |
 |---|---|
-| October 5 (Week 4) | `intent/` approved by you; `spec.md` with the profile schema, the "not yet" inventory, and language and model decisions |
+| October 5 (Week 4) | Tag `intent-spec`: `intent/` approved by you; `spec.md` with the profile schema, the "not yet" inventory, and language and model decisions |
 | October 19 (Week 5) | `plan.md`; profile drafted |
 | November 2 (Week 7) | Chatbot answering from the profile; Week 7 lab adds a spoken interface |
 | November 30 (Week 11) | Adversarial test set run; site deployed |
-| December 14 (Week 13) | Final; Comprehension Defense during finals week, December 17–23 |
+| December 14 (Week 13) | Tag `portfolio-final` and the deployed URL; Comprehension Defense during finals week, December 17–23 |
 
 Milestones are checked in class with feedback.
 
