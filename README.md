@@ -22,8 +22,8 @@ Two ideas run through the semester:
 |---|---|
 | `syllabus.md` | The syllabus. Source of truth for dates, grading, and policies. |
 | `scripts/` | The `orclaude` launcher that points Claude Code at any OpenRouter model, plus the Windows version, a smoke test, and a settings example. Copied from the [book examples](https://github.com/kousen/claude-code-up-and-running-examples/tree/main/scripts). |
-| `weeks/` | Weekly lab handouts and readings, added as the semester goes. Weeks 1 and 2 are available. |
-| `assignments/` | Assignment sheets. Week 1 and Week 2 sheets are available; project rubrics follow. |
+| `weeks/` | Weekly lab handouts and readings, added as the semester goes. Weeks 1 through 3 are available. |
+| `assignments/` | Assignment sheets. Weekly sheets through Week 3, plus the Team Project 1 and Individual Portfolio sheets. |
 | `slides/` | Weekly Slidev sources and PDF exports. |
 
 ## Submitting work
@@ -39,3 +39,7 @@ Major project submissions are Git repositories you own, created from the [artifa
 **[Week 2](weeks/02/README.md)** — inside the harness, your first API call from your own program, and the discovery interview that produces the first intent file. Repositories start from the artifact-chain template.
 
 [Setup additions](weeks/02/setup.md) · [Lab](weeks/02/lab.md) · [Slides](slides/week02.md) · [Slides (PDF)](slides/week02.pdf) · [Submission](assignments/week02-chat-client.md)
+
+**[Week 3](weeks/03/README.md)** — structured output, a five-case eval on two models, and the specification, the second artifact in the chain. Teams form; Team Project 1 and the Individual Portfolio are assigned.
+
+[Setup additions](weeks/03/setup.md) · [Lab](weeks/03/lab.md) · [Slides](slides/week03.md) · [Slides (PDF)](slides/week03.pdf) · [Submission](assignments/week03-structured-output.md) · [Team Project 1](assignments/team-project-1.md) · [Portfolio](assignments/portfolio.md)
