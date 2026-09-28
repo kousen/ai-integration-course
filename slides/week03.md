@@ -134,10 +134,18 @@ if obj.get("category") not in CATEGORIES:
 - Providers offer `response_format` with a schema. Some models honor it; some ignore it. Your parser is the guarantee.
 - A reply you cannot parse is a **failed case**, not a crash.
 
+<div class="note">Frameworks do this step for you: Spring AI and LangChain4j return a Java record; Pydantic-based tools do the same in Python. They still throw on a bad reply. Spring AI 2.0 can also re-prompt with the validation error, at the cost of extra calls.</div>
+
 <!--
 2:04–2:10. Three failure shapes seen in rehearsal: fenced JSON, empty reply
 at a low token budget, urgency outside the allowed set. Mention
 response_format as an option students can try at the end of the lab.
+Frameworks: Spring AI .entity(Record.class); LangChain4j AI Service returning
+a record; Python: Pydantic with the OpenAI SDK's parse helpers, Instructor,
+PydanticAI, LangChain with_structured_output. Spring AI 2.0:
+StructuredOutputValidationAdvisor / validateSchema() retries with the error
+appended, up to maxRepeatAttempts (default 3); no streaming. Each retry is a
+billed call. A framework is a legitimate language-decision reason (slide 10).
 -->
 
 ---
