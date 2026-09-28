@@ -50,7 +50,7 @@ Read the spec against the intent. If they disagree, the intent wins until you ch
 
 Correct at least one thing in the file. Commit: `git commit -m "Approve spec"`.
 
-## 3. Build and run the eval (15 minutes)
+## 3. Build and run the eval (20 minutes)
 
 ```text
 Read spec.md. Create the program and an eval runner that reads five cases
@@ -75,19 +75,13 @@ python3 eval.py          # or your Java equivalent
 
 Commit once it runs, whatever the score.
 
-## 4. Break it on purpose (5 minutes)
-
-Set `max_tokens` to 400 and run the eval again. Some models spend output tokens on hidden reasoning before the JSON, and at a low budget the reply comes back empty with `finish_reason` set to `length`. Your eval should report that as a failed case, not crash. If it crashes, fix the parser so that a non-JSON reply fails the case cleanly, then put the budget back.
-
-Record both runs in `CHECKS.md`.
-
-## 5. The second model (5 minutes)
+## 4. The second model (5 minutes)
 
 Change only `CHAT_MODEL` to `xiaomi/mimo-v2.6-flash` and run the eval again. Then, if a local model is available to you, point `CHAT_BASE_URL` at it and run once more. Record each run: model, cases passed, which case failed and how, tokens in and out from the summary line.
 
 When a case fails on one model and passes on another, ask whether the case or the model is wrong. A case that expects `low` urgency for a sales question is a judgment call; the `unknown` case is not. Say which kind each failure was.
 
-## 6. Explain and save (5 minutes)
+## 5. Explain and save (5 minutes)
 
 `README.md` should have:
 

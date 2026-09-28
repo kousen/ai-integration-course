@@ -322,8 +322,7 @@ the shape of the grounding prompt; stack is not the lesson.
 <div>
 
 <span class="step">4</span> Build; five cases; run<br>
-<span class="step">5</span> `max_tokens` 400, run again<br>
-<span class="step">6</span> Second model; local if you have one
+<span class="step">5</span> Second model; local if you have one
 
 </div>
 </div>
@@ -331,8 +330,8 @@ the shape of the grounding prompt; stack is not the lesson.
 <div class="note">weeks/03/lab.md · 45 minutes · Prof. Kousen circulates</div>
 
 <!--
-3:10–3:55. Protect steps 2–4. If time runs short, step 5 becomes "read the
-finding in setup.md" and step 6 becomes one run, not two.
+3:10–3:55. Protect steps 2–4. If time runs short, step 5 becomes one
+second-model run, no local.
 -->
 
 ---

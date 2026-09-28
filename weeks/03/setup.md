@@ -36,7 +36,7 @@ Trinity has added everyone enrolled to its Claude organization. The invitation e
 
 | Symptom | Next action |
 |---|---|
-| Reply is not JSON, or has text around it | Expected sometimes. The eval counts it as a failure; the lab's step 4 asks you to handle it |
+| Reply is not JSON, or has text around it | Expected sometimes. Your eval should count it as a failed case, not crash |
 | Empty reply, `finish_reason` is `length` | The model spent the output budget on reasoning; raise `max_tokens` |
 | One model passes, the other fails a case | That is the comparison. Record it; do not change the case to make it pass |
 | `402` or a credit message | OpenRouter balance or spend cap exhausted; tell Prof. Kousen |
