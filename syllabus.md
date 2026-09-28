@@ -97,7 +97,7 @@ All generated media and API usage must stay within the acceptable-use guidelines
 |---|---|---|
 | **Participation and labs** | 15% | Attendance, engagement, and in-class lab work. Most Mondays are roughly half lecture, half supervised lab. |
 | **Claude Academy certificates** | 10% | Five required certificates, on time. |
-| **Team Project 1: Multimodal Web App** | 15% | Teams of 2–3. A web app that generates, displays, and critiques images, with at least one other modality (vision or audio). |
+| **Team Project 1: Multimodal Web App** | 15% | Teams of 2–3. A web app that generates and displays images and critiques them with a vision model. Audio or vision on user input is a stretch goal. |
 | **Team Project 2: Agentic / MCP System** | 20% | Teams of 2–3. An agent or MCP server that performs a task beyond a single model call. |
 | **Individual Portfolio: AI-Enabled Profile Site** | 25% | Individual. A personal site with a grounded chatbot, built through the artifact chain over the whole semester. |
 | **Final: Comprehension Defense** | 15% | Individual oral exam during finals week. You walk the instructor through your portfolio and answer questions about every choice. |

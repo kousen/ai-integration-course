@@ -6,7 +6,9 @@
 
 ## What to build
 
-A web application that **generates images, displays them, and critiques them**, with **at least one other modality**: vision (the app reads images) or audio (the app listens or speaks). The subject is your choice. Examples that fit: a study-card generator that draws a diagram for a concept and has a second model check the diagram against the concept; a product-mockup tool that generates variations and scores them against a brief; a "describe, draw, compare" loop where the app photographs an object, generates a version from the description, and reports the differences.
+A web application that **generates images, displays them, and critiques them with a vision model**. The critique must read the generated image itself, not only the prompt that produced it. The subject is your choice.
+
+**Stretch, not required:** use vision on user input as well (for example, the user uploads a photo), or add audio (the app listens or speaks). Audio is covered in Week 7, the day this project is due, so take it on only if you get to it early. Examples that fit: a study-card generator that draws a diagram for a concept and has a second model check the diagram against the concept; a product-mockup tool that generates variations and scores them against a brief; a "describe, draw, compare" loop where the app photographs an object, generates a version from the description, and reports the differences.
 
 Every team member must be able to explain every part of the submission. That is checked in the presentation and again in the Comprehension Defense.
 
@@ -46,5 +48,5 @@ Ten minutes per team: the app running live, one artifact from the chain shown on
 | Evidence | Weight |
 |---|---|
 | The chain: intent, spec, plan, tests, PR history, annotation, all consistent with each other and with the code | about half |
-| The app: generates, displays, critiques, plus one more modality; runs during the presentation | about half |
+| The app: generates, displays, and critiques with a vision model that reads the image; runs during the presentation | about half |
 | Every member can explain every part | required |

@@ -278,7 +278,8 @@ repo's CLAUDE.md under Conventions. Ken records teams for Moodle groups.
 
 # Team Project 1: Multimodal Web App
 
-- Generates images, displays them, critiques them, **plus** vision or audio.
+- Generates images, displays them, and critiques them **with a vision model** that reads the image.
+- Stretch: vision on user input, or audio (Week 7, so only if you get there early).
 - Due **November 2** with a ten-minute presentation.
 - Team intent due **October 5**. Spec and plan October 19. Reviewed PRs October 26.
 - Chain and code weigh about the same. Code with no chain: half credit at most.
