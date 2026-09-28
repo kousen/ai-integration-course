@@ -53,7 +53,8 @@ Your program asks for data<br>Five cases say whether it worked<br>You write the 
 
 <!--
 1:30–1:40. Two Week 2 repos at week02-submitted: the intent corrections and
-the CHECKS.md table. Then seats: who has the email, nobody switches today.
+the CHECKS.md table. Then seats: who has the email. The agent may run on the
+seat; your program still calls OpenRouter.
 -->
 
 ---
