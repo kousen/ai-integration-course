@@ -1,0 +1,20 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Ask a model</title>
+<style>body{font:18px system-ui;max-width:40rem;margin:3rem auto}input{width:70%;font:inherit}pre{white-space:pre-wrap}</style>
+<h1>Ask a model</h1>
+<p>The browser sends only your question. The server adds the key and picks the model.</p>
+<form id="f"><input id="q" value="In one sentence, what is a context window?"> <button>Ask</button></form>
+<pre id="out"></pre>
+<script>
+document.getElementById("f").onsubmit = async (e) => {
+  e.preventDefault();
+  const out = document.getElementById("out");
+  out.textContent = "…";
+  const res = await fetch("/api/ask", { method: "POST", body: document.getElementById("q").value });
+  const data = await res.json();
+  out.textContent = res.ok
+    ? `${data.choices[0].message.content}\n\n[${data.model} · ${data.usage.prompt_tokens} in / ${data.usage.completion_tokens} out]`
+    : `Error ${res.status}: ${JSON.stringify(data.error ?? data)}`;
+};
+</script>

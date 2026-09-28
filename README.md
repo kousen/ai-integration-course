@@ -22,9 +22,10 @@ Two ideas run through the semester:
 |---|---|
 | `syllabus.md` | The syllabus. Source of truth for dates, grading, and policies. |
 | `scripts/` | The `orclaude` launcher that points Claude Code at any OpenRouter model, plus the Windows version, a smoke test, and a settings example. Copied from the [book examples](https://github.com/kousen/claude-code-up-and-running-examples/tree/main/scripts). |
-| `weeks/` | Weekly lab handouts and readings, added as the semester goes. Weeks 1 through 3 are available. |
-| `assignments/` | Assignment sheets. Weekly sheets through Week 3, plus the Team Project 1 and Individual Portfolio sheets. |
+| `weeks/` | Weekly lab handouts and readings, added as the semester goes. Weeks 1 through 4 are available. |
+| `assignments/` | Assignment sheets. Weekly sheets through Week 4, plus the Team Project 1 and Individual Portfolio sheets. |
 | `slides/` | Weekly Slidev sources and PDF exports. |
+| `examples/` | Small reference programs to copy, such as [keeping an API key on the server](examples/key-on-server/). |
 
 ## Submitting work
 
@@ -43,3 +44,7 @@ Major project submissions are Git repositories you own, created from the [artifa
 **[Week 3](weeks/03/README.md)** — structured output, a five-case eval on two models, and the specification, the second artifact in the chain. Teams form; Team Project 1 and the Individual Portfolio are assigned.
 
 [Setup additions](weeks/03/setup.md) · [Lab](weeks/03/lab.md) · [Slides](slides/week03.md) · [Slides (PDF)](slides/week03.pdf) · [Submission](assignments/week03-structured-output.md) · [Team Project 1](assignments/team-project-1.md) · [Portfolio](assignments/portfolio.md)
+
+**[Week 4](weeks/04/README.md)** — retrieval-augmented generation over the course's own pages, the plan (the third artifact in the chain), a one-page REST summary, and keeping the API key on a server for Team Project 1.
+
+[Setup additions](weeks/04/setup.md) · [Lab](weeks/04/lab.md) · [REST in one page](weeks/04/rest.md) · [Slides](slides/week04.md) · [Slides (PDF)](slides/week04.pdf) · [Submission](assignments/week04-rag-plan.md) · [Key on the server](examples/key-on-server/)
