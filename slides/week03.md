@@ -154,9 +154,9 @@ response_format as an option students can try at the end of the lab.
 <div class="statement">Case 5 is the one you will want to skip. It is the one that matters.</div>
 
 <!--
-2:10–2:18. Run eval.py on M3: 5/5 in rehearsal. Then the same on MiMo with
-CHAT_MAX_TOKENS=400: two empty replies, finish_reason length. The eval
-caught it; last week you had to notice by eye.
+2:10–2:18. Run eval.py on M3: 5/5 in rehearsal. Then MiMo v2.6 Flash with
+CHAT_MAX_TOKENS=60: case 4 truncated and unparseable (4/5 on Sept 28; v2.6
+passes at 400). The eval caught it; last week you had to notice by eye.
 -->
 
 ---

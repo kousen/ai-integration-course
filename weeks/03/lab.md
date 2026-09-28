@@ -83,7 +83,7 @@ Record both runs in `CHECKS.md`.
 
 ## 5. The second model (5 minutes)
 
-Change only `CHAT_MODEL` to `xiaomi/mimo-v2.5` and run the eval again. Then, if a local model is available to you, point `CHAT_BASE_URL` at it and run once more. Record each run: model, cases passed, which case failed and how, tokens in and out from the summary line.
+Change only `CHAT_MODEL` to `xiaomi/mimo-v2.6-flash` and run the eval again. Then, if a local model is available to you, point `CHAT_BASE_URL` at it and run once more. Record each run: model, cases passed, which case failed and how, tokens in and out from the summary line.
 
 When a case fails on one model and passes on another, ask whether the case or the model is wrong. A case that expects `low` urgency for a sales question is a judgment call; the `unknown` case is not. Say which kind each failure was.
 

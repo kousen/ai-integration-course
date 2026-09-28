@@ -14,6 +14,8 @@ python3 chat.py "Reply with the single word OK."      # or: java Chat.java "..."
 
 **Checkpoint E:** you get an answer and a usage line. If you get `401`, the key is not set in this terminal; if you get an empty answer with tokens billed, that is the hidden-reasoning case from Week 2 and it comes up again today.
 
+**Update `orclaude`.** The course copy in [`scripts/`](../../scripts/) changed on September 28: it now also routes the Fable model to your chosen slug, so picking Fable in `/model` no longer bills real Fable to your OpenRouter key. Copy the new `orclaude` (or `orclaude.bat`, or the `settings.local.json.example` block) over your old one. Prof. Kousen's video [Running Claude Code with any OpenRouter model](https://youtu.be/gb2X5feZNak) walks through the script. Two tips from it: put a credit limit and an expiry date on your OpenRouter key, and if Claude Code warns on exit that the model "isn't described by this version's model catalog", your session was capped at a 200K-token context. Launch with `orclaude "vendor/model[1m]"` for a 1M-token context if the model supports it; the quotes matter in zsh.
+
 ## 2. Java and JSON
 
 Java's standard library has no JSON parser. For today's lab, Java students may either let the agent write a small parser for the three fields the eval checks, or add one JSON library (Jackson or Gson) as a single jar on the classpath. Either choice belongs in `spec.md` under the language decision, with the trade-off stated. Python's `json` module needs nothing.

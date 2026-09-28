@@ -5,13 +5,14 @@ if not defined OPENROUTER_API_KEY (
     exit /b 1
 )
 if "%~1"=="" (
-    echo Usage: orclaude ^<vendor/model-slug^> [claude args...]  ^(no model given; refusing to fall back to a default^)
+    echo Usage: orclaude ^<vendor/model-slug^> [claude args...]  (no model given; refusing to fall back to a default^) >&2
     exit /b 1
 )
 set "MODEL=%~1"
 set "ANTHROPIC_BASE_URL=https://openrouter.ai/api"
 set "ANTHROPIC_AUTH_TOKEN=%OPENROUTER_API_KEY%"
 set "ANTHROPIC_API_KEY="
+set "ANTHROPIC_DEFAULT_FABLE_MODEL=%~1"
 set "ANTHROPIC_DEFAULT_OPUS_MODEL=%~1"
 set "ANTHROPIC_DEFAULT_SONNET_MODEL=%~1"
 set "ANTHROPIC_DEFAULT_HAIKU_MODEL=%~1"
