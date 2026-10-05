@@ -112,9 +112,9 @@ flowchart LR
 
 **For each question**
 
-```mermaid {scale: 0.75}
+```mermaid {scale: 0.65}
 flowchart LR
-  Q[Question] --> E2[Embed it] --> R[Closest chunks in index.json] --> P[Chunks + question] --> M[Chat model] --> A[Answer with citations]
+  Q[Question] --> E2[Embed it] --> R[Closest chunks] --> P[Chunks + question] --> M[Chat model] --> A[Answer + citations]
 ```
 
 <div class="note">Frameworks call a chunk a segment, and the index an embedding store or vector store.</div>
@@ -148,12 +148,48 @@ Real embeddings have 1,536 dimensions; the math is the same four lines.
 -->
 
 ---
+layout: center
+---
+
+# Three sentences, three directions
+
+<svg viewBox="0 0 760 330" style="width:690px;height:300px;max-width:690px;display:block;margin:0 auto;font-family:Arial,Helvetica,sans-serif">
+  <defs>
+    <marker id="ab" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#17335b"/></marker>
+    <marker id="aa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#a34c08"/></marker>
+    <marker id="ag" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#8a94a6"/></marker>
+  </defs>
+  <path d="M 150 290 A 90 90 0 0 0 137 244" fill="none" stroke="#a34c08" stroke-width="2"/>
+  <text style="font-size:18px;line-height:1" x="158" y="268" fill="#a34c08" font-weight="bold">31°</text>
+  <path d="M 190 290 A 130 130 0 0 0 85 162" fill="none" stroke="#8a94a6" stroke-width="2" stroke-dasharray="6 5"/>
+  <text style="font-size:18px;line-height:1" x="150" y="190" fill="#8a94a6" font-weight="bold">79°</text>
+  <line x1="60" y1="290" x2="400" y2="290" stroke="#17335b" stroke-width="4" marker-end="url(#ab)"/>
+  <text style="font-size:18px;line-height:1" x="62" y="320" fill="#17335b" font-weight="bold">Question: "When is the Week 3 lab due?"</text>
+  <line x1="60" y1="290" x2="351" y2="115" stroke="#a34c08" stroke-width="4" marker-end="url(#aa)"/>
+  <text style="font-size:18px;line-height:1" x="362" y="100" fill="#a34c08">"The Week 3 lab is due Monday, October 5."</text>
+  <text style="font-size:18px;line-height:1" x="362" y="126" fill="#a34c08" font-weight="bold">cosine 0.86</text>
+  <line x1="60" y1="290" x2="125" y2="26" stroke="#8a94a6" stroke-width="4" marker-end="url(#ag)"/>
+  <text style="font-size:18px;line-height:1" x="140" y="24" fill="#8a94a6">"Students may park in the lot behind the library."</text>
+  <text style="font-size:18px;line-height:1" x="140" y="50" fill="#8a94a6" font-weight="bold">cosine 0.19</text>
+</svg>
+
+<div class="statement">Rank every chunk by cosine against the question; the top k go into the prompt.</div>
+
+<div class="note">Measured with text-embedding-3-small on Oct 5, 2026, and drawn to scale in 2D. The real vectors have 1,536 dimensions; the angle math is identical.</div>
+
+<!--
+2:08. One question, two sentences from the corpus. The due-date sentence
+shares the question's direction; the parking sentence does not. That is the
+whole retrieval step: compute this number for every chunk, keep the best four.
+-->
+
+---
 
 # Live: index the course
 
 ```bash
 python3 rag_index.py ../../../ai-integration-course
-# 135 chunks, 21,501 tokens embedded -> index.json
+# 139 chunks, 22,133 tokens embedded -> index.json
 ```
 
 - Chunks are Markdown sections, split at headings.
