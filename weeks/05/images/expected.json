@@ -1,0 +1,32 @@
+{
+  "receipt-01.png": {
+    "merchant": "Mather Dining Hall",
+    "date": "2026-10-02",
+    "items": 3,
+    "total": 13.66
+  },
+  "receipt-02.png": {
+    "merchant": "Trinity Bookstore",
+    "date": "2026-09-29",
+    "items": 6,
+    "total": 73.0
+  },
+  "receipt-03.png": {
+    "merchant": "Long Walk Coffee",
+    "date": "2026-10-06",
+    "items": 3,
+    "total": 11.01
+  },
+  "receipt-04.png": {
+    "merchant": "Hartford Hardware",
+    "date": "2026-10-04",
+    "items": 4,
+    "total": 33.52
+  },
+  "receipt-05.png": {
+    "merchant": "CS Club Bake Sale",
+    "date": null,
+    "items": 3,
+    "total": 6.5
+  }
+}

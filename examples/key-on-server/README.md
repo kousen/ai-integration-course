@@ -29,3 +29,17 @@ Open http://localhost:8000 and ask something. Run it from this folder so the ser
 ## What these deliberately leave out
 
 A deployed version also needs a limit on who can call `/api/ask`, or anyone who finds the URL spends your credit: a password, a rate limit, or both. Give it its own OpenRouter key with a small credit limit. Hosting options (Cloudflare Pages Functions, Vercel, here.now proxy routes) are covered later in the semester; each keeps the key in a secret store for the same reason.
+
+## A browser-driven check (Week 5)
+
+`test_browser.py` drives a real browser with [Playwright](https://playwright.dev/python/): it opens the page, types a question, clicks **Ask**, waits for the answer, and then asserts what the browser was allowed to see. It is the check the Team Project 1 front end needs by October 26.
+
+```bash
+pip install playwright pytest && playwright install chromium    # once
+python3 server.py &                                              # or java Server.java
+python3 -m pytest test_browser.py -v                             # about one second plus the model call
+```
+
+The assertions, in order: the page source contains no key; the answer is not an error and contains the word the question asked for; no request that left the browser carried an `Authorization` header; the browser never called the provider; it did call `/api/ask`. The last three are why the test exists. A page that "works" can still leak the key, and only a browser-level check sees the requests the browser actually made.
+
+Playwright's Node version (`npm init playwright@latest`) does the same job for a JavaScript project. Either way the agent can write the test; you read the assertions.
