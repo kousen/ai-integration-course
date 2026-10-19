@@ -12,6 +12,7 @@ Slidev Markdown sources and exported PDFs. The shared light theme follows the bl
 - [Week 4 PDF](week04.pdf)
 - [Week 5 Slidev source](week05.md)
 - [Week 5 PDF](week05.pdf)
+- [Week 6 Slidev source](week06.md) (PDF exported after instructor review)
 
 The PDF matches the reviewed 28-slide source, including API-billed MiniMax M3, discretionary break timing, and `lyrics.txt` in student projects.
 

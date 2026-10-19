@@ -22,10 +22,10 @@ Two ideas run through the semester:
 |---|---|
 | `syllabus.md` | The syllabus. Source of truth for dates, grading, and policies. |
 | `scripts/` | The `orclaude` launcher that points Claude Code at any OpenRouter model, plus the Windows version, a smoke test, and a settings example. Copied from the [book examples](https://github.com/kousen/claude-code-up-and-running-examples/tree/main/scripts). |
-| `weeks/` | Weekly lab handouts and readings, added as the semester goes. Weeks 1 through 4 are available. |
-| `assignments/` | Assignment sheets. Weekly sheets through Week 4, plus the Team Project 1 and Individual Portfolio sheets. |
+| `weeks/` | Weekly lab handouts and readings, added as the semester goes. Weeks 1 through 6 are available. |
+| `assignments/` | Assignment sheets. Weekly sheets through Week 6, plus the Team Project 1 and Individual Portfolio sheets. |
 | `slides/` | Weekly Slidev sources and PDF exports. |
-| `examples/` | Small reference programs to copy, such as [keeping an API key on the server](examples/key-on-server/). |
+| `examples/` | Small reference programs to copy, such as [keeping an API key on the server](examples/key-on-server/), the [guardrail hook](examples/guardrail-hook/), an [image set with a checked critique](examples/image-set/), and a [PR reviewer with a release gate](examples/pr-review/). |
 
 ## Submitting work
 
@@ -48,3 +48,11 @@ Major project submissions are Git repositories you own, created from the [artifa
 **[Week 4](weeks/04/README.md)** — retrieval-augmented generation over the course's own pages, the plan (the third artifact in the chain), a one-page REST summary, and keeping the API key on a server for Team Project 1.
 
 [Setup additions](weeks/04/setup.md) · [Lab](weeks/04/lab.md) · [REST in one page](weeks/04/rest.md) · [Slides](slides/week04.md) · [Slides (PDF)](slides/week04.pdf) · [Submission](assignments/week04-rag-plan.md) · [Key on the server](examples/key-on-server/)
+
+**[Week 5](weeks/05/README.md)** — vision models reading receipts, structured output checked by code, the tests (the fourth artifact in the chain), a guardrail hook, and a browser-driven check for Team Project 1.
+
+[Setup additions](weeks/05/setup.md) · [Lab](weeks/05/lab.md) · [Slides](slides/week05.md) · [Slides (PDF)](slides/week05.pdf) · [Submission](assignments/week05-vision-tests.md) · [Guardrail hook](examples/guardrail-hook/)
+
+**[Week 6](weeks/06/README.md)** — image generation through the Image API and the SDK, a critique checked by code and a critic checked by a second model, and the Deploy stage: a reviewed pull request, a reviewing agent against `REVIEW.md`, and a release gate. The lab is homework.
+
+[Setup additions](weeks/06/setup.md) · [Lab](weeks/06/lab.md) · [Slides](slides/week06.md) · [Slides (PDF)](slides/week06.pdf) · [Submission](assignments/week06-image-review.md) · [Image set](examples/image-set/) · [Reviewer and gate](examples/pr-review/)

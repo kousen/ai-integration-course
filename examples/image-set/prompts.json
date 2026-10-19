@@ -1,0 +1,62 @@
+[
+  {
+    "name": "poster-01",
+    "prompt": "A hand-drawn poster for a college course called \"AI Integration\". A friendly robot and a student stand at a whiteboard covered in diagrams. The title \"AI Integration\" is large and clearly legible at the top. Marker-on-paper style, warm colors.",
+    "seed": 415,
+    "requirements": [
+      "There is a robot in the image",
+      "There is a human student in the image",
+      "There is a whiteboard in the image",
+      "The style looks hand-drawn, not photographic"
+    ],
+    "expected_text": "AI Integration"
+  },
+  {
+    "name": "poster-02",
+    "prompt": "A hand-drawn poster for a college course called \"AI Integration\". A robot points at a laptop screen while a student takes notes. The title \"AI Integration\" is large and clearly legible at the top. Marker-on-paper style, cool colors.",
+    "seed": 416,
+    "requirements": [
+      "There is a robot in the image",
+      "There is a human student in the image",
+      "There is a laptop in the image",
+      "The style looks hand-drawn, not photographic"
+    ],
+    "expected_text": "AI Integration"
+  },
+  {
+    "name": "poster-03",
+    "prompt": "A hand-drawn poster for a college course called \"AI Integration\". Three students and a small robot sit around a table with sticky notes. The title \"AI Integration\" is large and clearly legible at the top. Marker-on-paper style.",
+    "seed": 417,
+    "requirements": [
+      "There is a robot in the image",
+      "There are exactly three human students in the image",
+      "There are sticky notes in the image",
+      "The style looks hand-drawn, not photographic"
+    ],
+    "expected_text": "AI Integration"
+  },
+  {
+    "name": "poster-04",
+    "prompt": "A hand-drawn poster for a college course called \"AI Integration\". A robot and a student shake hands in front of a chalkboard with a flowchart on it. The title \"AI Integration\" is large and clearly legible at the top. Chalk-on-slate style.",
+    "seed": 418,
+    "requirements": [
+      "There is a robot in the image",
+      "There is a human student in the image",
+      "There is a flowchart on a board in the image",
+      "The robot and the student are shaking hands"
+    ],
+    "expected_text": "AI Integration"
+  },
+  {
+    "name": "poster-05",
+    "prompt": "A hand-drawn poster for a college course called \"AI Integration\". A student holds up a phone showing a chat screen while a robot looks over their shoulder. The title \"AI Integration\" is large and clearly legible at the top. Marker-on-paper style, no other text.",
+    "seed": 419,
+    "requirements": [
+      "There is a robot in the image",
+      "There is a human student in the image",
+      "There is a phone in the image",
+      "The only text in the image is the title"
+    ],
+    "expected_text": "AI Integration"
+  }
+]
