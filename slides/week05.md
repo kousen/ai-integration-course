@@ -325,9 +325,13 @@ BREAK 2:40–2:55.
 <div class="note">Chapter 6 of Claude Code: Up and Running · code.claude.com/docs/en/hooks</div>
 
 <!--
-2:55–3:00. Skills and CLAUDE.md are instructions to a model; a hook is a
-program. Use one when a rule shouldn't depend on the model remembering it.
-Other events: PostToolUse (format after edit), Stop, SessionStart.
+2:55–3:00. Lamp first: the Moonside Halo on the desk changes color on
+UserPromptSubmit / PreToolUse / PermissionRequest / Stop (blue, purple, green
+for Claude Code; cyan, amber, white for Codex). Same events, exit 0 always,
+nothing blocked: a hook that observes. Then: skills and CLAUDE.md are
+instructions to a model; a hook is a program. Use one when a rule shouldn't
+depend on the model remembering it. Other events: PostToolUse (format after
+edit), Stop, SessionStart.
 -->
 
 ---

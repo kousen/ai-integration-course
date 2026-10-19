@@ -48,4 +48,7 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     print(f"http://localhost:8000  (model {MODEL})")
-    HTTPServer(("localhost", 8000), Handler).serve_forever()
+    try:
+        HTTPServer(("localhost", 8000), Handler).serve_forever()
+    except KeyboardInterrupt:
+        print("\nstopped")

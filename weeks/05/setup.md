@@ -31,6 +31,14 @@ EOF2
 
 **Checkpoint A:** a sentence naming Mather Dining Hall and $13.66, and a usage line of roughly 700–800 tokens in. An image costs tokens like text does; a receipt-sized PNG is a few hundred to a thousand tokens depending on the model, well under a cent.
 
+**Hidden reasoning, again.** Both class models think before they answer, and on October 19 `xiaomi/mimo-v2.6-flash` started spending its *entire* output budget thinking: `finish_reason` is `length`, the content is empty, and raising `max_tokens` to 8,000 does not help. The fix on OpenRouter is one more field in the request body:
+
+```python
+body["reasoning"] = {"enabled": False}
+```
+
+But do not send it to every model. With reasoning off, `minimax/minimax-m3` stops reading the date on the faded receipt (it gets it every time with reasoning on, in about 150–200 thinking tokens). Same knob, opposite effect on the two models, so it is a per-model decision: make it a setting (an environment variable such as `CHAT_REASONING=off`, or a per-model table), and record the choice in the Models section of your spec. In Week 2 the advice was "raise `max_tokens`"; this is the next layer.
+
 Both class models accept images: `minimax/minimax-m3` and `xiaomi/mimo-v2.6-flash`. `curl -s https://openrouter.ai/api/v1/models` lists `input_modalities` for every model if you want another; some free ones also take images. A local model through Ollama works if it is a vision model (for example `ollama pull gemma3:4b`).
 
 ## 3. A test runner

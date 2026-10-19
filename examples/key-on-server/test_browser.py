@@ -6,6 +6,8 @@
 It drives a real browser: types a question, clicks Ask, waits for an answer, and then
 checks what the browser was allowed to see. The last two assertions are the point.
 """
+import os
+
 from playwright.sync_api import sync_playwright
 
 URL = "http://localhost:8000"
@@ -13,7 +15,8 @@ URL = "http://localhost:8000"
 
 def test_page_answers_and_the_key_never_reaches_the_browser():
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        # HEADED=1 shows the browser and slows each action to half a second, for watching it work.
+        browser = p.chromium.launch(headless=not os.environ.get("HEADED"), slow_mo=500 if os.environ.get("HEADED") else 0)
         page = browser.new_page()
         requests = []
         page.on("request", lambda r: requests.append((r.url, r.headers.get("authorization"))))

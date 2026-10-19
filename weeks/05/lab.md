@@ -85,7 +85,7 @@ again. Show me the test output each time. Stop after each step.
 
 Watch for two things. The no-key tests should cover the checker and the JSON parsing on hand-written inputs, including a receipt whose total is wrong and a reply with JSON inside prose. The eval should read every image in `images/` and compare with `images/expected.json`: total, number of items, merchant, date, and that the checker reports no problems.
 
-Run the eval on the class model, then change only `CHAT_MODEL` to `xiaomi/mimo-v2.6-flash` and run it again. Record both in `CHECKS.md`: per receipt, what passed and failed, and tokens in and out. When a receipt fails on one model, say whether the model misread the image or the spec was ambiguous (the discount's sign is a likely example). Run your linter (`ruff check .`, or your build's lint task) and record what it found.
+Run the eval on the class model, then change only `CHAT_MODEL` to `xiaomi/mimo-v2.6-flash` and run it again (if every receipt comes back empty with `finish_reason: length`, that model needs `"reasoning": {"enabled": false}`, and the other one does not; see the setup page). Record both in `CHECKS.md`: per receipt, what passed and failed, and tokens in and out. When a receipt fails on one model, say whether the model misread the image or the spec was ambiguous (the discount's sign is a likely example). Run your linter (`ruff check .`, or your build's lint task) and record what it found.
 
 Commit after the first green run: `git commit -m "Receipt reader with tests, two models"`.
 
