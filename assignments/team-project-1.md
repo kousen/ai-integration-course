@@ -22,7 +22,7 @@ This project is submitted as a full artifact chain. Working code with no chain, 
 | Design | `spec.md` with two decisions per component: **language** and **model**, each with the alternative considered | October 19 (Week 5), with the plan |
 | Build | `plan.md`: files, order, risks, proof | October 19 |
 | Test | Agent-written tests that run; a browser-driven check for the web front end | October 26 |
-| Deploy | At least one reviewed pull request per team member, with a `REVIEW.md` pass from a separate reviewing agent | October 26 (Week 6 lab wires the image set in via a reviewed PR) |
+| Deploy | At least one reviewed pull request per team member, with a `REVIEW.md` pass from a separate reviewing agent | November 2, with the final submission (the Deploy stage is taught October 26; the Week 6 lab's PR into the team repository is one of these) |
 | Maintain | `CLAUDE.md` current; `ANNOTATION.md` with the four questions for each component | November 2 |
 
 Milestones before November 2 are checked in class and get feedback, not grades.
