@@ -109,16 +109,16 @@ python3 generate.py prompts.json --out images          # five FLUX images, about
 python3 critique.py images/manifest.json               # five vision critiques on minimax/minimax-m3
 ```
 
-Look at all five images yourself before reading the critiques. Then read the critiques. For each image, `CHECKS.md` gets one line: cost, seconds, what the checker said (ok, or which requirement unmet, missing, or invented), and whether the title read matched. Then two more runs:
+Look at all five images yourself before reading the critiques, and read the titles letter by letter: image models get text wrong, and the narrow title read is there to catch it. Then read the critiques. For each image, `CHECKS.md` gets one line: cost, seconds, what the checker said (ok, or which requirement unmet, missing, or invented), and whether the title read matched. Then two more runs:
 
-- Generate one prompt again with the same seed. Is the image identical? (Compare the bytes, or just look.) Record the answer; that is what "seed" means for this model.
-- Generate the same prompt with the comparison model: `--model google/gemini-3.1-flash-lite-image --out images-nb` (about $0.04, priced per image token). Record the cost from `usage.cost`, and whether it met the same requirements.
+- Generate one prompt again with the same seed. Is the image identical? Look at both, then compare the files (`cmp a.jpg b.jpg`); the two answers can differ. Record both; that is what "seed" means for this model.
+- Generate the same prompt with the comparison model: `--model google/gemini-3.1-flash-lite-image --out images-nb` (about $0.03–0.04, priced per image token). Record the cost from `usage.cost`, and whether it met the same requirements.
 
 Commit: `git commit -m "Image set: five images, critiques, two image models"`. The images are small; commit them.
 
 ## 5. The critic was wrong (10 minutes)
 
-On October 19, Prof. Kousen generated the course poster with FLUX; the title came out as "AI Integration", correctly spelled. MiniMax M3's critique said the title was misspelled "Integratlon". The generator was right and the critic was wrong, and nothing in the program would have noticed. Your job in this step is to build the thing that notices.
+On October 19, Prof. Kousen generated the course poster with FLUX; the title came out as "AI Integration", correctly spelled. MiniMax M3's critique said the title was misspelled "Integratlon". The generator was right and the critic was wrong, and nothing in the program would have noticed. On October 20 the same question about the same poster got "Integertion" and a complaint about a robot-human handshake that is in a different poster. The hallucination changes from run to run; the habit does not. Your job in this step is to build the thing that notices.
 
 1. Run the critic a second time with the other class model, and compare in code:
 

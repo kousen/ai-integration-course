@@ -95,17 +95,17 @@ several request shapes and your spec says which one each component uses.
 
 # Raw, and through the SDK
 
-<div class="two">
+<div class="two" style="grid-template-columns: 1.25fr 1fr">
 <div>
 
 ```python
+url = "https://openrouter.ai/api/v1/images"
 body = {"model": MODEL, "prompt": PROMPT,
         "aspect_ratio": "1:1", "seed": 415}
-req = urllib.request.Request(
-  "https://openrouter.ai/api/v1/images",
-  data=json.dumps(body).encode(),
-  headers={"Authorization": f"Bearer {KEY}",
-           "Content-Type": "application/json"})
+hdr = {"Authorization": f"Bearer {KEY}",
+       "Content-Type": "application/json"}
+req = urllib.request.Request(url,
+      json.dumps(body).encode(), hdr)
 d = json.load(urllib.request.urlopen(req))
 b64 = d["data"][0]["b64_json"]
 ```
@@ -126,54 +126,62 @@ print(r.usage.cost)
 </div>
 </div>
 
-- The SDK is the same request with the URL, the header, and the JSON done for you, and typed replies.
-- It is a **dependency**: `pip install openrouter`, named in `spec.md` with its reason.
+- Same request, plumbing done, typed replies. A **dependency**: `pip install openrouter`, named in `spec.md`.
+- It can hide an option: MiMo's `reasoning.enabled` has no SDK field; the SDK form is `reasoning={"effort": "none"}`.
 
 <!--
 1:47–1:52. Weeks 2–5 were urllib on purpose so the request was visible.
 Now that they have seen it, the SDK is allowed and is the lab's path.
-What it hides: the HTTP status, the raw body. When it breaks, read those.
+What it hides: the HTTP status, the raw body, and options its typed model
+lacks. Found Oct 20: MiMo kept thinking through the SDK until the reasoning
+flag was changed to effort none. When an SDK call misbehaves, capture what
+it sent (httpx event hook) and compare with the raw request.
 -->
 
 ---
 
-# Live A: three images, with the bill
+# Live A: five images, with the bill
 
 ```bash
 python3 generate.py prompts.json --out images
 ```
 
 ```text
-images/poster-01.jpg  image/jpeg  seed=415  $0.014  3.2s
-images/poster-02.jpg  image/jpeg  seed=416  $0.014  3.1s
-images/poster-03.jpg  image/jpeg  seed=417  $0.014  3.4s
-3 images, $0.042 total, manifest in images/manifest.json
+images/poster-01.jpg  image/jpeg  seed=415  $0.014  3.3s
+images/poster-02.jpg  image/jpeg  seed=416  $0.014  3.0s
+images/poster-03.jpg  image/jpeg  seed=417  $0.014  2.8s
+images/poster-04.jpg  image/jpeg  seed=418  $0.014  3.6s
+images/poster-05.jpg  image/jpeg  seed=419  $0.014  4.5s
+5 images, $0.0700 total, manifest in images/manifest.json
 ```
 
-- `black-forest-labs/flux.2-klein-4b`: about **$0.014** per 1:1 image, 4,096 image tokens, ~3 s (October 19).
+- `black-forest-labs/flux.2-klein-4b`: **$0.014** per 1:1 image from `usage.cost`, 3–4.5 s (measured October 20).
 - The manifest records prompt, seed, model, media type, and cost **per image**, so nothing downstream guesses.
 
 <!--
-1:52–2:00. Demo A in examples/image-set with the class key. Open the three
-posters. Read the manifest aloud: this is what the critic and the checker
-work from. The $0.014 is from usage.cost on Oct 19; their number may differ.
+1:52–2:00. Demo A in examples/image-set with the class key (~17 s, $0.07).
+Open the five posters: three of the five titles are misspelled (02, 03, 05 on
+Oct 20). Don't explain yet; Live B comes back to it. Read the manifest aloud:
+this is what the critic and the checker work from.
 -->
 
 ---
 
 # Seeds, and what "the same" means
 
-- Same model + same prompt + same **seed** → the same image, when the model honors the seed.
+- Same model + same prompt + same **seed** → the same picture, when the model honors the seed. Not always the same **bytes**: FLUX on Oct 20 gave the same picture twice and two different JPEG files.
 - Different seed → a different picture of the same thing.
 - That is what makes an image **set** reproducible and a billed test repeatable.
-- The lab asks you to generate one prompt twice with one seed and say whether the bytes matched.
+- The lab asks you to generate one prompt twice with one seed and say whether the picture matched, and whether the file did.
 
 <div class="statement">A test that generates a fresh random image every run is not testing anything you can name.</div>
 
 <!--
 2:00–2:04. Not every model honors seeds exactly; the honest answer is "check
-it and write down what you saw." The comparison model is token-priced:
-google/gemini-3.1-flash-lite-image, about $0.04 per 1K image.
+it and write down what you saw." So a byte-for-byte test of a generated image
+is the wrong test; the title read is a better one. The comparison model is
+token-priced: google/gemini-3.1-flash-lite-image, $0.034 measured Oct 20; it
+invented a semester, a room number and a URL on the poster (show it).
 -->
 
 ---
@@ -184,7 +192,7 @@ google/gemini-3.1-flash-lite-image, about $0.04 per 1K image.
 |---|---|
 | Subject and scene: "a robot and a student at a whiteboard" | composes it |
 | Style: "hand-drawn, marker on paper, warm colors" | renders in that style |
-| Text: `the title "AI Integration", large, legible` | tries; text is where image models most often fail |
+| Text: `the title "AI Integration", large, legible` | tries; text is where image models most often fail (3 of 5 posters on Oct 20) |
 | `aspect_ratio`, resolution, output format | shapes the file |
 | What to leave out: "no other text" | sometimes; a negative is weaker than a positive |
 
@@ -267,26 +275,30 @@ loosely (case, punctuation). Show tests/test_checker.py: nine tests, no key.
 # Live B: the critic that was wrong
 
 ```text
+poster-02: ok  title read: 'AI INTEGATION' (MISMATCH)
 poster-01: ok  title read: 'AI Integration' (match)
 ```
 
-October 19, same poster, open-ended prompt *"Critique this poster"*, MiniMax M3:
+Open-ended *"Critique this poster"* on poster-01, MiniMax M3:
 
 ```text
-... the title appears to be misspelled as "Integratlon" ...
+Oct 19: ... the title appears to be misspelled as "Integratlon" ...
+Oct 20: # Critique of the "AI Integertion" Poster
 ```
 
-- The generator was right. The critic hallucinated a typo.
-- Nothing in a program that **trusts the critique** would have noticed.
+- Poster-02: the generator misspelled it; the narrow read caught it. Poster-01: the generator was right; the critic invented a typo, a different one each day.
+- The second critic read poster-02's `INTEGATION` as "AI INTEGRATION": it corrected what was printed.
 
 <div class="statement">A critique is model output. Check it like any other.</div>
 
 <!--
-2:30–2:38. Demo B: run critique.py on poster-01, then the open-ended prompt
-in the terminal (rehearse: the hallucination may or may not reproduce; if it
-doesn't, show the Oct 19 transcript). Three ways to check a critic: a second
-model (--compare), a narrow question compared in code ("write the title
-exactly" == expected text), a person looking. The lab does all three.
+2:30–2:38. Demo B: critique.py on the set (M3, ~18 s): the narrow read flags
+02, 03, 05, which really are misspelled. Then the open-ended prompt on
+poster-01 (open_ended.py): on Oct 20 it claimed "Integertion" and a
+handshake; if it doesn't reproduce, show reference/open-ended-2026-10-20.md.
+Then --compare against the MiMo file: MiMo "fixed" INTEGATION. Three ways
+to check a critic: a second model, a narrow question compared in code, a
+person looking. The lab does all three.
 -->
 
 ---
@@ -376,22 +388,27 @@ python3 examples/pr-review/review.py; echo "exit $?"
 ```
 
 ```text
-Pass 1: Must not merge (1)
-  server.py:12: OPENROUTER_API_KEY is hard-coded -> read it from the environment
-Pass 3: Should fix (1)
-  critique.py:40: duplicated JSON extraction -> reuse extract_json
+Pass 1: Must not merge (2)
+  generate.py:4: hardcoded API key committed -> read os.environ, rotate it
+  generate.py:6-11: `make` never calls `critique`; spec requires it -> call it
+Pass 2: Must fix before merge (2)
+  generate.py:10: json.loads(...)["verdict"] trusts model output -> validate
+  generate.py:11: new `critique` behavior has no test -> add one
+[minimax/minimax-m3 · 908 in / 1385 out · cost 0.0015]
 exit 1
 ```
 
-- In: `REVIEW.md`, `spec.md`, `git diff main...HEAD`. Out: findings, one per line, grouped by pass.
-- Exit 1 on any pass 1 or 2. Exit 2 if it did not answer in form: a gate **fails closed**.
-- It can be wrong both ways. Each finding is checked against the code; a wrong one gets a reply on the PR.
+- In: `REVIEW.md`, `spec.md`, the diff. Out: findings by pass. Exit 1 on pass 1 or 2; exit 2 when it did not answer in form: a gate **fails closed**.
+- It can be wrong both ways: check each finding against the code; a wrong one gets a reply on the PR.
 
 <!--
-3:15–3:22. Demo C: a branch in the reference repo with a planted pass-1
-problem (a key-looking string). Run review.py, read the finding, remove the
-plant, run again, exit 0. Then gh pr comment --body-file review.txt. Contrast
-with the Week 5 hook: that one fails open; a gate must not.
+3:15–3:22. Demo C: the scratch repo from make_review_repo.sh, branch
+`feature` with a planted key and an unchecked json.loads. Run review.py (M3,
+~9 s, $0.0015): the output above is the Oct 20 run. Then MiMo for $0.00007,
+same pass-1 findings. Remove the plant (generate-main.py), run again, expect
+exit 0 or pass-3 advice. gh pr comment --body-file is in the lab, not run
+here (no PR in a scratch repo). Contrast with the Week 5 hook: that one
+fails open; a gate must not.
 -->
 
 ---
@@ -407,7 +424,8 @@ with the Week 5 hook: that one fails open; a gate must not.
 #!/bin/sh
 set -e
 ruff check .
-env -u OPENROUTER_API_KEY python3 -m pytest -q
+env -u OPENROUTER_API_KEY \
+  python3 -m pytest -q
 ```
 
 `cp gate.sh .git/hooks/pre-push`
@@ -420,7 +438,7 @@ env -u OPENROUTER_API_KEY python3 -m pytest -q
 ```yaml
 on: [pull_request]
 steps:
-  - run: pip install -r requirements.txt pytest ruff
+  - run: pip install pytest ruff
   - run: ruff check .
   - run: python3 -m pytest -q
 ```
@@ -523,8 +541,8 @@ open the PR early. Submission is the PR URL plus the tag.
 - [OpenRouter: image generation](https://openrouter.ai/docs/features/multimodal/image-generation) · [openrouter on PyPI](https://pypi.org/project/openrouter/) · [gh pr](https://cli.github.com/manual/gh_pr) · [Git hooks](https://git-scm.com/docs/githooks) · [Claude Code hooks](https://code.claude.com/docs/en/hooks).
 - [The AI-Native SDLC Playbook](https://claude.com/blog/the-ai-native-sdlc-playbook): the Deploy stage; the [Academy course](https://academy.claude.com/courses/ai-native-sdlc-playbook) assigned today.
 - [Artifact-chain template](https://github.com/kousen/artifact-chain-template): `REVIEW.md`, the four passes.
-- Image generation and the critique rehearsed October 19, 2026 on `black-forest-labs/flux.2-klein-4b` and `minimax/minimax-m3`; prices quoted are from that day's `usage.cost` and the model pages.
+- Image generation, the critique, and the reviewer rehearsed October 19–20, 2026 on `black-forest-labs/flux.2-klein-4b`, `google/gemini-3.1-flash-lite-image`, `minimax/minimax-m3`, and `xiaomi/mimo-v2.6-flash`; prices quoted are those runs' `usage.cost`.
 
 </div>
 
-<p class="note">Prepared October 19, 2026.</p>
+<p class="note">Prepared October 19–20, 2026.</p>

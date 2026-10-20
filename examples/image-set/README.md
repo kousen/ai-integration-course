@@ -25,7 +25,7 @@ Without a key, `generate.py` and `critique.py` stop with one line saying so and 
 
 ## What the checker can and cannot say
 
-The critic is a model. The code does not know whether there is a robot in the picture; it knows whether the critic **answered every requirement, answered only those, and said each was met**, and whether the title the model read back matches the title the prompt asked for. That is enough to catch a critic that drifts from the checklist, invents a requirement, returns prose instead of JSON, or misreads text, which is what happened on October 19, 2026: FLUX spelled "AI Integration" correctly and the critic reported "Integratlon". A critic that says "met" when it is not is caught only by a second model (`--compare`) or by a person looking. Use both.
+The critic is a model. The code does not know whether there is a robot in the picture; it knows whether the critic **answered every requirement, answered only those, and said each was met**, and whether the title the model read back matches the title the prompt asked for. That is enough to catch a critic that drifts from the checklist, invents a requirement, returns prose instead of JSON, or misreads text, which is what happened on October 19, 2026: FLUX spelled "AI Integration" correctly and the critic reported "Integratlon". The next day the generator failed the other way: three of five FLUX posters misspelled the title, the narrow title read on `minimax/minimax-m3` caught all three, and `xiaomi/mimo-v2.6-flash` read one of them as "AI INTEGRATION", silently correcting what was printed. A critic that says "met" when it is not is caught only by a second model (`--compare`) or by a person looking. Use both.
 
 ## Two request shapes
 
@@ -33,6 +33,6 @@ Image generation has its own endpoint and body (`model`, `prompt`, `aspect_ratio
 
 ## Settings that matter
 
-- **Seed.** Same model, prompt, and seed should give the same image; the lab asks you to check. Change the seed for a different picture of the same thing.
-- **Reasoning.** `xiaomi/mimo-v2.6-flash` needs `reasoning={"enabled": False}` or its reply is empty; `minimax/minimax-m3` needs reasoning on. `critique.py` keeps a per-model table; see [Week 5 setup, section 2](../../weeks/05/setup.md).
+- **Seed.** Same model, prompt, and seed should give the same image; the lab asks you to check. On October 20, FLUX.2 klein gave the same picture and different JPEG bytes for seed 415 twice, so compare by looking or by the title read, not by hashing the file. Change the seed for a different picture of the same thing.
+- **Reasoning.** `xiaomi/mimo-v2.6-flash` needs its hidden reasoning off or its reply is empty or cut short; `minimax/minimax-m3` needs reasoning on. The raw API takes `"reasoning": {"enabled": false}`; the SDK's reasoning object only knows `effort`, so the SDK form is `reasoning={"effort": "none"}` (`{"enabled": False}` is silently sent as `{}`). `critique.py` keeps a per-model table; see [Week 5 setup, section 2](../../weeks/05/setup.md).
 - **Cost.** One generation per prompt, one critique per image, never a model call inside a loop of tests. The manifest and the critique file record what each call cost so `CHECKS.md` can quote it.

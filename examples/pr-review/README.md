@@ -20,13 +20,17 @@ python3 path/to/examples/pr-review/review.py; echo "exit $?"
 ```
 
 ```text
-Pass 1: Must not merge (1)
-  server.py:12: OPENROUTER_API_KEY is hard-coded -> read it from the environment
-Pass 3: Should fix (1)
-  critique.py:40: duplicated JSON extraction -> reuse extract_json
-[minimax/minimax-m3 · <tokens in> in / <tokens out> out · cost <from the reply>]
+Pass 1: Must not merge (2)
+  generate.py:4: Hardcoded API key (`sk-or-v1-...`) committed in source; spec explicitly requires the key never be stored in the repo -> Delete the literal and revert to os.environ["OPENROUTER_API_KEY"]; treat this secret as leaked and rotate it
+  generate.py:6-11: `make` returns the generated image without calling `critique`; spec requires "Every image is critiqued by a vision model" -> Have `make` call `critique` on the produced image
+Pass 2: Must fix before merge (2)
+  generate.py:10: `json.loads(...)["verdict"]` trusts model output with no validation -> Wrap parsing in try/except, verify the `verdict` key exists, handle non-JSON output
+  generate.py:11: New `critique` behavior is added without any test -> Add a test asserting the critique is parsed and invalid responses are rejected
+[minimax/minimax-m3 · 908 in / 1385 out · cost 0.00153844]
 exit 1
 ```
+
+That is a real run (October 20, 2026) on a two-function diff with a planted key; `xiaomi/mimo-v2.6-flash` found the same two pass-1 problems for $0.00007.
 
 Options: `--diff file.patch` to review a saved diff, `--base` for a branch other than `main`, `--review` and `--spec` for the policy and spec paths, `--model` or `REVIEW_MODEL=...` for the reviewer (default `minimax/minimax-m3`; `xiaomi/mimo-v2.6-flash` gets its reasoning setting from a per-model table, see [Week 5 setup, section 2](../../weeks/05/setup.md)). `--findings saved.txt` re-parses a saved reply without a key, for tests and demonstrations.
 

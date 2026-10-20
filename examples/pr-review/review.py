@@ -25,7 +25,7 @@ import sys
 from pathlib import Path
 
 DEFAULT_MODEL = "minimax/minimax-m3"
-REASONING = {"xiaomi/mimo-v2.6-flash": {"enabled": False}}     # weeks/05/setup.md, section 2
+REASONING = {"xiaomi/mimo-v2.6-flash": {"effort": "none"}}     # SDK form of {"enabled": false}; weeks/05/setup.md, section 2
 MAX_DIFF_CHARS = 60_000          # about 15k tokens; a bigger PR should be smaller PRs
 PASS_NAMES = {1: "Must not merge", 2: "Must fix before merge", 3: "Should fix", 4: "Nice to have"}
 LINE = re.compile(r"^\s*(?:[-*]\s*)?(?:PASS\s*)?([1-4])\s*\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*(?:\|\s*(.*?))?\s*$", re.IGNORECASE)

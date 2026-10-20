@@ -21,6 +21,8 @@ pip install openrouter
 
 That installs the official `openrouter` package (version 1.3.68 at the time of writing). Everything Weeks 2–5 did with `urllib` is a method on one client object: `client.chat.send(...)`, `client.embeddings.generate(...)`, and this week `client.images.generate(...)`. It is a dependency, so it goes in `spec.md` under Dependencies with its reason, and the Week 5 guard will refuse the install until it is there.
 
+**What the SDK hides.** The raw API turns MiMo's hidden reasoning off with `"reasoning": {"enabled": false}` (Week 5, section 2). The SDK's `reasoning` object has no `enabled` field, only `effort`, so `reasoning={"enabled": False}` is silently sent as `{}` and MiMo thinks through its whole budget again. The SDK form is `reasoning={"effort": "none"}` (or `reasoning_effort="none"`); the Week 6 examples use it. When an SDK call behaves differently from the raw request, look at what it actually sent.
+
 ## 3. One image
 
 The Image API is a different endpoint from chat (`POST /api/v1/images`), with a different request shape: a prompt, an aspect ratio, a seed. This generates one image with the class image model and saves it:
@@ -40,11 +42,11 @@ print(f"poster.{ext}", item.media_type, "cost:", r.usage.cost)
 EOF2
 ```
 
-**Checkpoint A:** a `poster.jpg` (or `.png`) you can open, showing a robot, a student, a whiteboard, and the title spelled correctly, and a cost line of about `0.014`. On October 19 this call took about 3 seconds. The `usage.cost` in the reply is what you were actually charged; record it rather than estimating.
+**Checkpoint A:** a `poster.jpg` (or `.png`) you can open, showing a robot, a student, a whiteboard, and the title, and a cost line of about `0.014`. On October 19 and 20 this call took 3 to 4 seconds. If the title is misspelled, keep the image: text is where image models fail most, and the lab's critic-checker exists to catch exactly that (in rehearsal, three of five seeds misspelled "Integration"). The `usage.cost` in the reply is what you were actually charged; record it rather than estimating.
 
-**Seeds.** The same model, prompt, and seed should give you the same image again, which is what makes an image set reproducible and a test repeatable. Change the seed and you get a different picture of the same thing. Not every model honors the seed exactly; the lab asks you to check.
+**Seeds.** The same model, prompt, and seed should give you the same image again, which is what makes an image set reproducible and a test repeatable. Change the seed and you get a different picture of the same thing. Not every model honors the seed exactly, and "the same image" may not mean the same file: on October 20, two FLUX calls with seed 415 gave the same picture and different JPEG bytes. The lab asks you to check both ways.
 
-**Other image models.** `client.images.list_models()` returns every model the Image API can call; `python3 -c "from openrouter import OpenRouter; import os; [print(m.id) for m in OpenRouter(api_key=os.environ['OPENROUTER_API_KEY']).images.list_models().data]"` lists their ids. The lab's comparison model is `google/gemini-3.1-flash-lite-image`, which is priced per image token (about $0.04 for a 1K image) and stamps its output with a SynthID watermark. Do not use `qwen/qwen-image-2.1-turbo`; in rehearsal it hung for forty minutes.
+**Other image models.** `client.images.list_models()` returns every model the Image API can call; `python3 -c "from openrouter import OpenRouter; import os; [print(m.id) for m in OpenRouter(api_key=os.environ['OPENROUTER_API_KEY']).images.list_models().data]"` lists their ids. The lab's comparison model is `google/gemini-3.1-flash-lite-image`, which is priced per image token ($0.034 for one 1:1 image on October 20; it accepted `seed` and `aspect_ratio`) and stamps its output with a SynthID watermark. Do not use `qwen/qwen-image-2.1-turbo`; in rehearsal it hung for forty minutes.
 
 ## 4. The GitHub CLI, for pull requests
 
@@ -72,4 +74,5 @@ The Week 5 guard stays installed in every repository you use the agent in, inclu
 | The generation takes minutes | Some models queue; try the class model, and never wait more than a minute or two in a test |
 | `gh: command not found` on Windows | Open a new terminal after installing, or use the winget/scoop install from cli.github.com |
 | `gh pr create` says "no commits between main and ..." | You are on `main`; make a branch first (lab step 6) |
+| MiMo's reply is empty or cut off | Hidden reasoning spent the budget; through the SDK use `reasoning={"effort": "none"}` (section 2), not `{"enabled": False}` |
 | The reviewer prints nothing and exits 2 | The model did not answer in the expected form; the gate fails closed. Run again or read the raw reply it printed |

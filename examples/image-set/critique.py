@@ -23,8 +23,9 @@ import sys
 from pathlib import Path
 
 DEFAULT_MODEL = "minimax/minimax-m3"
-# Hidden reasoning is a per-model setting: see weeks/05/setup.md, section 2.
-REASONING = {"xiaomi/mimo-v2.6-flash": {"enabled": False}}
+# Hidden reasoning is a per-model setting (weeks/05/setup.md, section 2). The raw API takes
+# {"enabled": false}; the SDK's reasoning object only knows "effort", so this is the SDK form.
+REASONING = {"xiaomi/mimo-v2.6-flash": {"effort": "none"}}
 
 CHECKLIST_PROMPT = """You are checking a generated image against the prompt that produced it.
 Prompt: {prompt}
@@ -116,7 +117,7 @@ def _verdicts(entry: dict) -> dict:
 
 # ---------- the billed part ----------
 
-def ask(client, model: str, image_path: Path, media_type: str, question: str, max_tokens: int = 800) -> tuple[str | None, dict]:
+def ask(client, model: str, image_path: Path, media_type: str, question: str, max_tokens: int = 1500) -> tuple[str | None, dict]:
     """One vision call: text plus the image as a data URL, through the chat endpoint (Week 5's request)."""
     data = base64.b64encode(image_path.read_bytes()).decode()
     kwargs = {"reasoning": REASONING[model]} if model in REASONING else {}
@@ -124,6 +125,7 @@ def ask(client, model: str, image_path: Path, media_type: str, question: str, ma
         {"type": "text", "text": question},
         {"type": "image_url", "image_url": {"url": f"data:{media_type};base64,{data}"}}]}], **kwargs)
     usage = {"in": c.usage.prompt_tokens, "out": c.usage.completion_tokens} if c.usage else {}
+    usage["finish"] = c.choices[0].finish_reason      # "length" means the budget ran out mid-answer
     return c.choices[0].message.content, usage
 
 
@@ -139,7 +141,7 @@ def critique_set(client, model: str, manifest_path: Path) -> list[dict]:
         result = {"name": entry["name"], "model": model, "critique": critique, "raw": raw,
                   "usage": usage, "check": check(entry["requirements"], critique)}
         if entry.get("expected_text"):
-            read, usage2 = ask(client, model, image, entry["media_type"], TEXT_PROMPT, max_tokens=100)
+            read, usage2 = ask(client, model, image, entry["media_type"], TEXT_PROMPT, max_tokens=400)
             result["text_read"] = (read or "").strip()
             result["text_matches"] = text_matches(entry["expected_text"], read)
             result["usage_text"] = usage2
