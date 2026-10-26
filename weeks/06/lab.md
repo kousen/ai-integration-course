@@ -139,7 +139,7 @@ Commit: `git commit -m "Image set: the critic checked"`.
 
 ## 6. The Deploy stage: a reviewed pull request (20–30 minutes, plus waiting for a teammate)
 
-"Deploy" in the chain means a reviewed merge, not hosting; hosting is Week 7. In the **team repository**, on a branch of your own, add the piece of this lab that Team Project 1 needs: your image set and manifest, and the change that wires the generator or the checklist critique into the app (your team's `plan.md` says which piece is yours; if a teammate's PR already merged the generator, build on it, don't add a second copy). The Week 5 guard must be installed there too.
+"Deploy" in the chain means a reviewed merge, not hosting; hosting is Week 7. In the **team repository**, on a branch of your own, add the piece of this lab that Team Project 1 needs: your image set and manifest, and the change that wires the generator or the checklist critique into the app (your team's `plan.md` says which piece is yours; if a teammate's PR already merged the generator, build on it, don't add a second copy). The Week 5 guard must be installed there too. The team repository also needs a `requirements.txt` with `openrouter` in it (and whatever else the team's `spec.md` names): the spec is where a dependency is justified, the requirements file is where the machine reads it, and `gate.yml` installs from that file, so a repository without one fails its first pull request.
 
 ```bash
 cd path/to/team-repo
