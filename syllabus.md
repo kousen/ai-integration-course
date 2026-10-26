@@ -215,11 +215,10 @@ Two files travel with every repo: `CLAUDE.md` (team conventions, commands, commo
 
 ---
 
-### Week 6 — Monday, October 26 *(mid-term)*
+### Week 6 — Monday, October 26
 **Image generation; deploy and review**
 
 - Text-to-image APIs; prompt design, style control, negative prompts
-- Video generation APIs: current capabilities, cost, and provenance
 - Provenance metadata and responsible use
 - *Chain stage: Deploy.* Pull requests, a separate reviewing agent, `REVIEW.md` passes ranked by severity, hooks as release gates
 - **Lab:** generate and critique an image set; wire it into Team Project 1 via a reviewed PR

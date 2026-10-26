@@ -12,6 +12,8 @@ Slidev Markdown sources and exported PDFs. The shared light theme follows the bl
 - [Week 4 PDF](week04.pdf)
 - [Week 5 Slidev source](week05.md)
 - [Week 5 PDF](week05.pdf)
+- [Week 6 Slidev source](week06.md)
+- [Week 6 PDF](week06.pdf)
 
 The PDF matches the reviewed 28-slide source, including API-billed MiniMax M3, discretionary break timing, and `lyrics.txt` in student projects.
 
@@ -27,6 +29,8 @@ Build a preview outside this repository and export the student PDF:
 slidev build week02.md --out /tmp/cpsc415-week02-preview
 slidev export week02.md --output week02.pdf
 ```
+
+If the exported PDF has fewer pages than the deck (Week 6 lost its last four with Slidev 53), export slide by slide: `slidev export week06.md --per-slide --output week06.pdf`.
 
 The existing instructor environment has Slidev installed globally, as in Senior Seminar. Students do not need Slidev to complete the lab. PDF export requires a working Chromium runtime. Keep the PDF in the course repository and post a copy to Moodle after instructor review. Presenter cues are in Markdown comments; they are not rendered into the student PDF.
 

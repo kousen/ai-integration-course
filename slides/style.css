@@ -21,6 +21,8 @@
 .prompt { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 21px; line-height: 1.5; border-left: 4px solid #d97706; padding-left: 24px; }
 .statement { border-left: 5px solid #d97706; padding: 8px 0 8px 24px; margin-top: 28px; font-size: 29px; }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; align-items: start; }
+.two > div { min-width: 0; }
+.slidev-layout .two pre, .slidev-layout .two .slidev-code { font-size: 0.72em !important; }
 .step { font-size: 64px; color: #1d4ed8; line-height: 1; font-weight: 700; }
 .slidev-layout .slidev-code { border: 1px solid #d8e2ef; }
 .slidev-layout .foot { position: absolute; bottom: 20px; left: 54px; font-size: 14px; color: #607086; }

@@ -1,0 +1,21 @@
+# Release gate in CI: the same two commands as gate.sh, run by GitHub on every pull request.
+# Copy to .github/workflows/gate.yml in your project. No API key is given to the job on
+# purpose: tests that call a model are skipped here and run by a person, with the output
+# recorded in CHECKS.md. A required check on the main branch (Settings > Branches) turns
+# this from a report into a gate: the PR cannot merge until it is green.
+name: gate
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt pytest ruff
+      - run: ruff check .
+      - run: python3 -m pytest -q
