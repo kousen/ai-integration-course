@@ -227,7 +227,7 @@ Two files travel with every repo: `CLAUDE.md` (team conventions, commands, commo
 ---
 
 ### Week 7 — Monday, November 2
-**Team Project 1 presentations; audio**
+**Team Project 1 presentations; then audio**
 
 - Team presentations and peer critique of the Multimodal Web App
 - Speech-to-text and text-to-speech APIs
