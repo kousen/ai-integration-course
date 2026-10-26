@@ -30,11 +30,15 @@ Every project in the profile answers: **What is this?** **Why this choice?** **W
 |---|---|
 | October 5 (Week 4) | Tag `intent-spec`: `intent/` approved by you; `spec.md` with the profile schema, the "not yet" inventory, and language and model decisions |
 | October 19 (Week 5) | `plan.md`; profile drafted |
-| November 2 (Week 7) | Chatbot answering from the profile; Week 7 lab adds a spoken interface |
+| November 2 (Week 7) | Chatbot answering from the profile; the Week 7 lab (due November 9) adds a spoken interface |
 | November 30 (Week 11) | Adversarial test set run; site deployed |
 | December 14 (Week 13) | Tag `portfolio-final` and the deployed URL; Comprehension Defense during finals week, December 17–23 |
 
 Milestones are checked in class with feedback.
+
+## Hosting (added November 2)
+
+The November 30 milestone says "deployed." [Week 7's hosting page](../weeks/07/hosting.md) is the decision and the proof: pick Cloudflare Pages (the course default), Vercel, here.now, or a server you run, write the choice and the rejected alternative into `spec.md`, give the deployed site **its own OpenRouter key with a credit limit**, cap the route, and run the four checks (page source, network tab, grep of the build and the history, the browser check against the live URL) before calling it deployed. The per-turn cost from the Week 7 lab is the number that justifies the limit. No public deployment is required before November 30; the chatbot and the spoken interface can run on localhost until then.
 
 ## Reference implementation
 

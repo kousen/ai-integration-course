@@ -1,0 +1,26 @@
+{
+  "name": "Sam Rivera",
+  "headline": "Trinity College senior, computer science. Looking for a first software job in 2027.",
+  "projects": [
+    {
+      "name": "Ask the course (RAG over course notes)",
+      "what": "A command-line program that indexes the course's Markdown pages with OpenRouter embeddings and answers questions from the top-scoring chunks.",
+      "why": "Python, because the course examples were Python and the cosine math is clearer there; text-embedding-3-small because it was the cheapest model that passed the five-question eval.",
+      "breaks": "Questions whose answer is spread across three pages: the top-three chunks miss one of them.",
+      "learned": "The index had 165 chunks and a query cost under a tenth of a cent; the retrieval, not the model, decided the answer quality."
+    },
+    {
+      "name": "Receipt reader",
+      "what": "A vision model reads a photographed receipt into JSON and the code checks that the items add up.",
+      "why": "Two class models compared on seven receipts; the checker is plain code so the model's arithmetic is never trusted.",
+      "breaks": "A discount printed as a negative number; every model copied the sign and the total failed.",
+      "learned": "Edge cases are specification questions, not model bugs."
+    }
+  ],
+  "skills_shipped": ["Python", "Java", "Git and GitHub pull requests", "pytest", "OpenRouter chat, embeddings, vision, and image APIs"],
+  "not_yet": [
+    {"skill": "Kubernetes", "why": "No project has needed more than one server; I would learn it on the job."},
+    {"skill": "React", "why": "The portfolio site is static HTML on purpose; a framework is on the list for the spring."},
+    {"skill": "Rust", "why": "Curious, not started."}
+  ]
+}
