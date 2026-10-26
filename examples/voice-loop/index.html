@@ -1,0 +1,60 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Ask by voice</title>
+<style>
+  body{font:18px system-ui;max-width:42rem;margin:3rem auto;line-height:1.4}
+  button{font:inherit;padding:.5rem 1rem} #rec[data-on="1"]{background:#c00;color:#fff}
+  pre{white-space:pre-wrap;background:#f4f6f8;padding:1rem} .small{color:#555;font-size:.9em}
+</style>
+<h1>Ask by voice</h1>
+<p>Hold the button and ask a question about the person in the profile. The browser sends only the recording; the server transcribes it, answers from the profile, and speaks the answer back.</p>
+<p>
+  <button id="rec">Hold to talk</button>
+  &nbsp; or upload a clip: <input id="file" type="file" accept="audio/*"> <button id="send">Ask</button>
+</p>
+<p class="small">Keyboard path: <input id="q" size="40" placeholder="type a question"> <button id="askText">Ask by text</button></p>
+<pre id="out"></pre>
+<audio id="player" controls hidden></audio>
+<script>
+const out = document.getElementById("out"), player = document.getElementById("player");
+
+async function send(blob, type) {
+  out.textContent = "…";
+  const res = await fetch("/api/voice", { method: "POST", headers: { "Content-Type": type }, body: blob });
+  show(await res.json(), res.status);
+}
+function show(d, status) {
+  if (status !== 200) { out.textContent = `Error ${status}: ${d.error}`; return; }
+  const cost = d.cost ? `stt $${d.cost.stt ?? "?"} · chat $${d.cost.chat ?? "?"} · tts $${d.cost.tts ?? "?"}` : "";
+  const secs = d.seconds ? `  ·  ${d.seconds.stt ?? "?"}s + ${d.seconds.chat ?? "?"}s + ${d.seconds.tts ?? "?"}s` : "";
+  const err = d.tts_error ? `\n\n(speech failed: ${d.tts_error})` : "";
+  out.textContent = `You said: ${d.transcript}\n\nAnswer: ${d.answer}\n\n[${cost}${secs}]${err}`;
+  if (d.audio_b64) { player.src = "data:audio/mpeg;base64," + d.audio_b64; player.hidden = false; player.play(); }
+}
+
+// Hold-to-talk with the browser's recorder (webm/opus in Chrome and Firefox).
+let recorder, chunks = [];
+const rec = document.getElementById("rec");
+async function start() {
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  recorder = new MediaRecorder(stream, { mimeType: "audio/webm" });
+  chunks = [];
+  recorder.ondataavailable = e => chunks.push(e.data);
+  recorder.onstop = () => { stream.getTracks().forEach(t => t.stop()); send(new Blob(chunks, { type: "audio/webm" }), "audio/webm"); };
+  recorder.start(); rec.dataset.on = "1"; rec.textContent = "Listening… release to send";
+}
+function stop() { if (recorder && recorder.state === "recording") recorder.stop(); rec.dataset.on = ""; rec.textContent = "Hold to talk"; }
+rec.onmousedown = start; rec.onmouseup = stop; rec.onmouseleave = stop;
+rec.ontouchstart = e => { e.preventDefault(); start(); }; rec.ontouchend = e => { e.preventDefault(); stop(); };
+
+// The fallback: a file the user picked, sent with its own type (audio/mpeg for an .mp3).
+document.getElementById("send").onclick = () => {
+  const f = document.getElementById("file").files[0];
+  if (f) send(f, f.type || "audio/mpeg");
+};
+document.getElementById("askText").onclick = async () => {
+  out.textContent = "…";
+  const res = await fetch("/api/ask", { method: "POST", body: document.getElementById("q").value });
+  show(await res.json(), res.status);
+};
+</script>

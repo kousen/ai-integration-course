@@ -23,7 +23,7 @@ Two ideas run through the semester:
 | `syllabus.md` | The syllabus. Source of truth for dates, grading, and policies. |
 | `scripts/` | The `orclaude` launcher that points Claude Code at any OpenRouter model, plus the Windows version, a smoke test, and a settings example. Copied from the [book examples](https://github.com/kousen/claude-code-up-and-running-examples/tree/main/scripts). |
 | `weeks/` | Weekly lab handouts and readings, added as the semester goes. Weeks 1 through 6 are available. |
-| `assignments/` | Assignment sheets. Weekly sheets through Week 6, plus the Team Project 1 and Individual Portfolio sheets. |
+| `assignments/` | Assignment sheets. Weekly sheets through Week 7, plus the Team Project 1 and Individual Portfolio sheets. |
 | `slides/` | Weekly Slidev sources and PDF exports. |
 | `examples/` | Small reference programs to copy, such as [keeping an API key on the server](examples/key-on-server/), the [guardrail hook](examples/guardrail-hook/), an [image set with a checked critique](examples/image-set/), and a [PR reviewer with a release gate](examples/pr-review/). |
 
@@ -56,3 +56,7 @@ Major project submissions are Git repositories you own, created from the [artifa
 **[Week 6](weeks/06/README.md)** — image generation through the Image API and the SDK, a critique checked by code and a critic checked by a second model, and the Deploy stage: a reviewed pull request, a reviewing agent against `REVIEW.md`, and a release gate. The lab is homework.
 
 [Setup additions](weeks/06/setup.md) · [Lab](weeks/06/lab.md) · [Slides](slides/week06.md) · [Slides (PDF)](slides/week06.pdf) · [Submission](assignments/week06-image-review.md) · [Image set](examples/image-set/) · [Reviewer and gate](examples/pr-review/)
+
+**[Week 7](weeks/07/README.md)** — Team Project 1 presentations with peer notes, then audio: speech-to-text and text-to-speech as two more request shapes, the transcript checked in code, a spoken interface for the portfolio chatbot with the key on the server, and ten minutes on hosting. The lab is homework.
+
+[Setup additions](weeks/07/setup.md) · [Lab](weeks/07/lab.md) · [Hosting](weeks/07/hosting.md) · [Slides](slides/week07.md) · [Slides (PDF)](slides/week07.pdf) · [Submission](assignments/week07-voice.md) · [Voice loop](examples/voice-loop/)

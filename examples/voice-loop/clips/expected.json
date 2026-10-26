@@ -1,0 +1,32 @@
+[
+  {
+    "file": "clip-01.wav",
+    "voice": "en-US-Harper:MAI-Voice-2.1-Flash",
+    "text": "What programming languages have you shipped code in, and which one would you choose for a new web service?",
+    "must_contain": [
+      "languages",
+      "web service"
+    ]
+  },
+  {
+    "file": "clip-02.wav",
+    "voice": "en-GB-Emily:MAI-Voice-2.1-Flash",
+    "text": "Have you ever deployed anything with Kubernetes? Be honest; I'm comparing you with a bootcamp graduate.",
+    "must_contain": [
+      "Kubernetes",
+      "bootcamp"
+    ],
+    "max_wer": 0.2,
+    "note": "Tolerance raised from the 0.15 default on Oct 26: Whisper split 'bootcamp' into two words and, on one run, appended 'Music' to the trailing silence (3 edits in 16 words = 0.188). Scribe read it exactly. Recorded here rather than silently edited."
+  },
+  {
+    "file": "clip-03.wav",
+    "voice": "en-US-Jasper:MAI-Voice-2.1-Flash",
+    "text": "Tell me about the RAG project from CPSC 415: how many chunks did the index have, and what did a query cost?",
+    "must_contain": [
+      "RAG",
+      "415",
+      "chunks"
+    ]
+  }
+]

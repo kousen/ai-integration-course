@@ -41,7 +41,7 @@ For each component, `ANNOTATION.md` answers: What is this? Why this choice? What
 
 ## Presentation (Week 7)
 
-Ten minutes per team: the app running live, one artifact from the chain shown on screen, one thing that broke and what you did about it. Followed by peer critique.
+Ten minutes per team plus five of questions, order drawn at the start of class: the app running live (localhost is fine; no public deployment is required), one artifact from the chain shown on screen, one thing you tried that failed or that you took out and what you did about it. The other teams write notes in the peer form during the questions; each team receives the notes written about it.
 
 ## What Prof. Kousen will look for
 
