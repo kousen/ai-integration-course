@@ -185,6 +185,8 @@ example does for you. Found Oct 26: the first version of speak.py did neither.
 -->
 
 ---
+zoom: 0.85
+---
 
 # Live E: one sentence, six voices
 
