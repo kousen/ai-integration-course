@@ -319,14 +319,14 @@ client.chat.send(model=AUDIO_CHAT_MODEL, messages=[{"role": "user", "content": [
 | You want | Use | You get |
 |---|---|---|
 | the words | `/audio/transcriptions` | text + seconds + cost |
-| a model to **reason about** the audio: tone, a question answered from it, audio with an image | `input_audio` part on `/chat/completions` | a chat completion |
+| a model to **reason about** the audio: tone, a question, audio + image | `input_audio` part on `/chat/completions` | a chat completion |
 | the words spoken | `/audio/speech` | bytes |
-
-- Where media stands, in your own experience now: text mature; images and audio a generation behind and good; video behind that.
 
 <!--
 3:38–3:40. Not demoed; the "finish early" item. Same shape as the Week 5
-image part. Then hosting.
+image part. Say aloud where media stands in their own experience now: text
+mature; images and audio a generation behind and good; video behind that.
+Then hosting.
 -->
 
 ---
@@ -340,13 +340,22 @@ image part. Then hosting.
 | **here.now** | no code: a **proxy route** in `.herenow/proxy.json` | a **service variable** injected into the proxied request |
 | Your own server | the Week 4 server in a container | the host's environment |
 
+<!--
+3:40–3:44. Describe, don't rank: all three have free tiers and agent skills
+(the deploy mechanics are the agent's job). The decision is a spec decision
+with the rejected alternative. weeks/07/hosting.md is the page.
+-->
+
+---
+
+# Hosting: the key and the cap
+
 - The site gets **its own key with a credit limit**. A voice turn is about half a cent; a $5 limit is a thousand of them, and when it leaks you rotate one key.
 - Cap the route: message length, a rate limit per IP, one model call per request, CORS to your own origin.
 
 <!--
-3:40–3:46. Describe, don't rank: all three have free tiers and agent skills
-(the deploy mechanics are the agent's job). The decision is a spec decision
-with the rejected alternative. weeks/07/hosting.md is the page.
+3:44–3:46. The cap is code in the function, not a dashboard setting; it goes
+in the spec's Dependencies/Hosting section with the key limit.
 -->
 
 ---
