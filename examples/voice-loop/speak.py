@@ -64,7 +64,7 @@ def cost_of(client: OpenRouter, gen_id: str | None) -> float | None:
         return None
     try:
         return client.generations.get_generation(id=gen_id).data.total_cost
-    except Exception:  # noqa: BLE001  (not there yet, or the lookup failed; the audio is already saved)
+    except Exception:  # noqa: BLE001  # not there yet, or the lookup failed; the audio is already saved
         return None
 
 
