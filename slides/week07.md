@@ -185,8 +185,6 @@ example does for you. Found Oct 26: the first version of speak.py did neither.
 -->
 
 ---
-zoom: 0.85
----
 
 # Live E: one sentence, six voices
 
@@ -199,6 +197,17 @@ python3 speak.py "सीपीएससी 415 में आपका स्व�
 python3 speak.py "..." --model elevenlabs/eleven-v4-turbo --voice george
 ```
 
+<!--
+3:12–3:16. Play the clips from instructor/week07/reference/accents (made Oct
+26): Harper, Emily, Priya; Valeria in Spanish; Grok's eve in Hindi (it
+auto-detects the language); George. Ask the room which locales they want;
+MAI has 23. The voice id belongs to the model: George is not a MAI voice.
+-->
+
+---
+
+# Live E: what six voices cost
+
 | Model | Per character | 67 characters | Time |
 |---|---|---|---|
 | `microsoft/mai-voice-2.1-flash` (class) | $0.000015 | **$0.0010** | 0.5–0.8 s |
@@ -207,11 +216,9 @@ python3 speak.py "..." --model elevenlabs/eleven-v4-turbo --voice george
 | `hexgrad/kokoro-82m` (open weights) | $0.0000006 | $0.00004 | 0.4 s … 197 s |
 
 <!--
-3:12–3:20. Play the clips from instructor/week07/reference/accents (made Oct
-26): Harper, Emily, Priya; Valeria in Spanish; Grok's eve in Hindi (it
-auto-detects the language); George. Ask the room which locales they want;
-MAI has 23. The voice id belongs to the model: George is not a MAI voice.
-Kokoro's 197-second call was the Hindi one; cheap is not the same as fast.
+3:16–3:20. Kokoro's 197-second call was the Hindi one; cheap is not the same
+as fast. The voice id belongs to the model, so the per-character price is
+really a per-voice price.
 -->
 
 ---
