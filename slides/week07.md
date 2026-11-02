@@ -283,12 +283,21 @@ flowchart LR
   S -->|transcript, answer,<br>audio, 3 costs| B[Browser plays it]
 ```
 
+<!--
+3:32–3:34. One turn, three billed calls, and the browser only ever talks to
+your server. Same shape as the Week 4 key-on-server page with two more hops.
+-->
+
+---
+
+# The loop: what a turn costs
+
 - Three billed calls per turn. On the class models: transcription ≈ $0.00002, answer ≈ $0.0005, speech ≈ $0.003 (two or three sentences at $0.000015 a character). **About half a cent a turn**, measured $0.0035–0.0057.
 - The answer function is the **same one** the typed path uses. The refuse-to-fabricate rule applies to what is said aloud.
 - The browser sends audio and gets audio. It never sees the key or the model names.
 
 <!--
-3:32–3:38. Demo G: python3 server.py, open the page, hold the button, ask
+3:34–3:38. Demo G: python3 server.py, open the page, hold the button, ask
 "Have you ever used Kubernetes?" Hear "No, I haven't" with the reason from
 the profile. Show the three costs and the three timings on the page (Oct 26:
 0.6–1.9 s + 1.8–3.5 s + 0.7–1.4 s). Found in rehearsal: at max_tokens 400 M3
