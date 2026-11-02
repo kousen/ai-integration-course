@@ -60,3 +60,7 @@ Major project submissions are Git repositories you own, created from the [artifa
 **[Week 7](weeks/07/README.md)** — Team Project 1 presentations with peer notes, then audio: speech-to-text and text-to-speech as two more request shapes, the transcript checked in code, a spoken interface for the portfolio chatbot with the key on the server, and ten minutes on hosting. The lab is homework.
 
 [Setup additions](weeks/07/setup.md) · [Lab](weeks/07/lab.md) · [Hosting](weeks/07/hosting.md) · [Slides](slides/week07.md) · [Slides (PDF)](slides/week07.pdf) · [Submission](assignments/week07-voice.md) · [Voice loop](examples/voice-loop/)
+
+**[Week 8](weeks/08/README.md)** — Tool use and function calling: the model asks, the program decides. The schema, the four messages, the loop with its cap, the three failure modes (the bad call, the endless loop, the hallucinated tool or result) and the plain code that catches each, side effects and permission. One real tool for the portfolio chatbot, its misuse cases tested with a scripted model. Team Project 2 assigned.
+
+[Setup additions](weeks/08/setup.md) · [Lab](weeks/08/lab.md) · [Slides](slides/week08.md) · [Slides (PDF)](slides/week08.pdf) · [Submission](assignments/week08-tool.md) · [Team Project 2](assignments/team-project-2.md) · [Tool loop](examples/tool-loop/)
