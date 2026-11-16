@@ -1,14 +1,14 @@
-# Lab: Your team's MCP server, one tool each
+# Lab: Your team's MCP server
 
-**Time:** about 75 minutes of your own work, with your team. This lab is homework; in the last twenty minutes of class your team decides who owns which tool (step 1).
+**Time:** about 75 minutes of your own work, with your team. This lab is homework; in the last twenty minutes of class your team decides which tools come first (step 1).
 
 Last week your program was the only thing that could call your tool. This week the tool moves behind a Model Context Protocol server, so a host you did not write can discover it and call it. The server is the first working piece of Team Project 2, and this lab is the Build milestone on the [TP2 sheet](../../assignments/team-project-2.md): `plan.md`, and the server running and registered in Claude Code.
 
-The lab lives in your **team's TP2 repository**. It is graded individually: **each member owns one tool**, with its tests, in commits under their own name. Python with the official `mcp` SDK, as the sheet says. The worked example is [`examples/mcp-server`](../../examples/mcp-server/); read its README first.
+The lab lives in your **team's TP2 repository** and is a team submission with **one grade for the team**. Python with the official `mcp` SDK, as the sheet says. The worked example is [`examples/mcp-server`](../../examples/mcp-server/); read its README first.
 
 ## 0. Repository and working rules (5 minutes)
 
-Each member, in the team repository:
+Everyone, in the team repository:
 
 ```bash
 git pull
@@ -21,9 +21,8 @@ One member adds `mcp` and `pytest` to `requirements.txt` and to **Dependencies**
 ```markdown
 - Week 9: the MCP server is server.py, built with the mcp SDK version 2
   (MCPServer from mcp.server; not FastMCP). Stages assigned: plan, tests.
-- Each tool has one owner, named in plan.md. Tests for a tool are written by
-  its owner before the tool's code, and go through the protocol with an
-  in-memory Client, with no model and no network.
+- Tests for a tool are written before the tool's code, and go through the
+  protocol with an in-memory Client, with no model and no network.
 - Nothing is printed to stdout: the host reads it as protocol. Use logging.
 - Credentials are read from the server's environment and never returned in a
   result. A tool with a side effect records a pending request; it never
@@ -32,21 +31,21 @@ One member adds `mcp` and `pytest` to `requirements.txt` and to **Dependencies**
 
 Commit (`git commit -am "Week 9 working rules"`), push, and everyone pulls. Check that `.venv/` and any pending or outbox file are in `.gitignore`.
 
-## 1. Who owns which tool (5 minutes)
+## 1. Which tools first (5 minutes)
 
-Open `spec.md` at the server's tool list. Each member takes **one** tool. Between you, the first tools should include:
+Open `spec.md` at the server's tool list and choose the **two or three tools** the server needs first. They should include:
 
 - one that **reads from the system your task is about** (the course materials, the repository, the document set, the spreadsheet), and
 - if your task has any tool that changes something, **that one**, because its gate is the hardest part.
 
-Write the owners in `plan.md` in the next step. If your spec lists fewer tools than you have members, the spec is missing a tool; fix the spec first.
+Write them in `plan.md` in the next step, with who is doing what; how you divide the work is up to the team. Every member should be able to explain every tool, as the TP2 sheet says.
 
 ## 2. The plan (10 minutes)
 
 ```text
 Read spec.md and add a "Week 9: the server" section to plan.md: the files
-(server.py, client.py, tests/, .mcp.json), the owner of each tool, the
-order of work, risks, and Proof. In Proof, list for each tool the misuse
+(server.py, client.py, tests/, .mcp.json), the first tools, the
+order of work, who is doing what, risks, and Proof. In Proof, list for each tool the misuse
 cases its no-key tests cover, and say what registering the server in
 Claude Code proves that the tests do not. Do not write code.
 ```
@@ -62,10 +61,10 @@ Fill in **Approved by**, commit `Approve plan (week 9)`.
 
 ## 3. Tests first, through the protocol (20 minutes)
 
-Each member, for their own tool:
+For each of the first tools:
 
 ```text
-I own the tool <name> in spec.md. Write its tests first, in
+We are adding the tool <name> from spec.md. Write its tests first, in
 tests/test_<name>.py, using an in-memory client as
 examples/mcp-server/tests/test_server.py does: `async with Client(mcp)`.
 No model, no network, no subprocess. Run them so I see them fail, then
@@ -82,14 +81,14 @@ At least five tests per tool:
 
 For a tool with a side effect, add: after the call, **nothing has left the machine**, and the pending request is on record.
 
-Commit the failing tests under your own name: `git commit -m "Server: tests for <name>, failing"`.
+Commit the failing tests: `git commit -m "Server: tests for <name>, failing"`.
 
 ## 4. The server (15 minutes)
 
-One member creates `server.py` with the `MCPServer` object and the `if __name__ == "__main__": mcp.run()` block, and pushes. Then each member adds their tool:
+Create `server.py` with the `MCPServer` object and the `if __name__ == "__main__": mcp.run()` block. Then, for each tool:
 
 ```text
-Implement the tool <name> in server.py so my tests pass. The schema comes
+Implement the tool <name> in server.py so its tests pass. The schema comes
 from the type hints: use Annotated with Field for descriptions and limits.
 The docstring is what the model reads to decide when to call the tool, so
 write it as an instruction. Raise ToolError for failures the model should
@@ -99,7 +98,7 @@ the output.
 
 Read the docstring the agent wrote. It is the only thing the model knows about your tool. Rewrite it yourself until it says **when** to call the tool, not just what the tool is.
 
-Commit under your own name: `git commit -m "Server: <name>"`. Pull often; three people are editing one file.
+Commit: `git commit -m "Server: <name>"`. If more than one of you is editing `server.py`, pull often and commit small.
 
 ## 5. A host with no model (5 minutes)
 
@@ -121,13 +120,13 @@ Add `.mcp.json` at the repository root, and commit it so every teammate gets the
 
 Start `orclaude` **from the repository root with the virtual environment active**, approve the server, and type `/mcp`: your server should be listed as connected, with your tools. Ask one question that needs a tool, and one that asks for the side effect if you have one. Save the session with `/export transcripts/week09-claude-code.txt` and commit it.
 
-Each member runs this on their own machine; one transcript in the repository is enough.
+Every member should run this on their own machine; one transcript in the repository is enough.
 
 ## 7. What you found (5 minutes)
 
 In `CHECKS.md`, a **Week 9** section:
 
-- **Tools**: one line per tool: its owner, the number of tests, and what happened when Claude Code called it.
+- **Tools**: one line per tool: the number of tests, and what happened when Claude Code called it.
 - **Server or skill?** One paragraph: why this task needs a server, and one piece of it that could have been a script or a skill instead, with your reason for the choice you made.
 - **The gate**: for the tool that changes something, what the server does, what the host did, and what a person still has to do. If you have no such tool yet, say which TP2 tool will be the first.
 
@@ -137,7 +136,7 @@ git tag week09-submitted
 git push origin main week09-submitted
 ```
 
-One tag for the team. Each member then submits on Moodle.
+One tag for the team, and one Moodle submission for the team.
 
 ## If you finish early
 

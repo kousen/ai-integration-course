@@ -2,7 +2,7 @@
 
 **Monday, November 16, 2026 · 1:30–4:10 PM · MC-225**
 
-Last week you wrote a tool schema that only your own loop could read. The Model Context Protocol is that schema standardized: a server describes its tools, and any host that speaks the protocol can discover them and call them, whether it is Claude Code, a desktop app, an IDE, or the loop you write next week. Today's example puts Week 8's functions behind a server without changing them. After the break the same server gets a second host (a loop like Week 8's, with the tools discovered instead of imported), moves from stdio to HTTP, and is set beside a server someone else runs. The lab is your team's own server, one tool per member, which is the first working piece of Team Project 2.
+Last week you wrote a tool schema that only your own loop could read. The Model Context Protocol is that schema standardized: a server describes its tools, and any host that speaks the protocol can discover them and call them, whether it is Claude Code, a desktop app, an IDE, or the loop you write next week. Today's example puts Week 8's functions behind a server without changing them. After the break the same server gets a second host (a loop like Week 8's, with the tools discovered instead of imported), moves from stdio to HTTP, and is set beside a server someone else runs. The lab is your team's own server, which is the first working piece of Team Project 2.
 
 By the end of the session, you should be able to:
 
@@ -16,7 +16,7 @@ By the end of the session, you should be able to:
 
 ## Today's materials
 
-1. [Lab: Your team's MCP server, one tool each](lab.md) (homework; owners chosen in class; due November 23)
+1. [Lab: Your team's MCP server](lab.md) (homework; first tools chosen in class; due November 23)
 2. [Week 9 slides (PDF)](../../slides/week09.pdf) · [Slide source](../../slides/week09.md)
 3. [Week 9 submission requirements](../../assignments/week09-mcp-server.md)
 4. [The MCP server example](../../examples/mcp-server/): `server.py`, `client.py` (a host with no model), `host.py` (a host with one), `.mcp.json`, nine no-key tests
@@ -34,7 +34,7 @@ Setup is one line, inside a virtual environment: `pip install mcp pytest`. The e
 | 2:20–2:55 | **Live A–C:** the server in Python; a host with no model; the same server in Claude Code; credentials, the gate, stdout |
 | 2:55–3:10 | Break |
 | 3:10–3:50 | Tests through the protocol; **Live D–F:** your own loop as the second host; the same server over HTTP; a server you did not write (Context7) |
-| 3:50–4:10 | The lab: each team decides who owns which tool; what is due; questions |
+| 3:50–4:10 | The lab: each team decides which tools come first; what is due; questions |
 
 ## Due today at 1:30 PM
 
@@ -46,7 +46,7 @@ Setup is one line, inside a virtual environment: `pip install mcp pytest`. The e
 
 **Due Monday, November 23, at 1:30 PM:**
 
-- The [Week 9 submission](../../assignments/week09-mcp-server.md): the lab, in your team's TP2 repository, tag `week09-submitted`. Each member submits individually and names the tool they own.
+- The [Week 9 submission](../../assignments/week09-mcp-server.md): the lab, in your team's TP2 repository, tag `week09-submitted`. One submission and one grade per team.
 - **Team Project 2 milestones:** Build (this lab) and Test (the billed eval of the task on two models). See the [TP2 sheet](../../assignments/team-project-2.md).
 
 ### Reading and viewing to support the work

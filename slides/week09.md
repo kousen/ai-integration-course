@@ -486,8 +486,8 @@ Railway and Cloudflare publish servers of the same shape.
 <div>
 
 <span class="step">0</span> Team repository, venv, working rules<br>
-<span class="step">1</span> Each member claims **one tool** from the spec<br>
-<span class="step">2</span> The plan, with the owners in it<br>
+<span class="step">1</span> Choose the first **two or three tools**<br>
+<span class="step">2</span> The plan: files, order, Proof<br>
 <span class="step">3</span> Misuse tests first, through `Client(mcp)`
 
 </div>
@@ -501,35 +501,34 @@ Railway and Cloudflare publish servers of the same shape.
 </div>
 </div>
 
-<div class="note">weeks/09/lab.md · in your team's TP2 repository · each member owns one tool and its tests · due November 23</div>
+<div class="note">weeks/09/lab.md · in your team's TP2 repository · one submission and one grade per team · due November 23</div>
 
 <!--
-3:50. Walk the sheet. One tool per member, committed by that member, so
-everyone can explain the server in the presentation and the Defense. Side-
+3:50. Walk the sheet. A team submission, one grade per team. Side-
 effect tools are gated in the server, as request_intro is.
 -->
 
 ---
 
-# Before you go: who owns which tool
+# Before you go: which tools first
 
 - Sit with your team for ten minutes. Open `spec.md` at the server's tool list.
-- Each member takes **one** tool. Write the owners down; they go in `plan.md`.
-- One of them reads from the system your task is about. If any tool changes something, someone owns that one.
+- Choose the **two or three tools** the server needs first. They go in `plan.md`.
+- One of them reads from the system your task is about. If any tool changes something, include that one.
 
 <div class="statement">Is your system external, or is it the two hosts that make this a server?</div>
 
 <!--
 3:55. Ten minutes, in the room. Visit each team: the one-line task, the
 tools in the spec, which one has a side effect and where its gate lives.
-Nobody leaves without an owner per tool.
+Nobody leaves without the first tools chosen.
 -->
 
 ---
 
 # Before November 23
 
-- **Week 9 submission:** the team repository URL + `week09-submitted`, submitted by each member.
+- **Week 9 submission:** the team repository URL + `week09-submitted`. One submission, one grade per team.
 - **TP2 milestones:** `plan.md`; the server running and registered in Claude Code; misuse tests for every tool.
 - Week 10 is agents from scratch: `host.py` is the starting point for your own loop as TP2's **second host**.
 
