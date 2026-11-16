@@ -15,6 +15,8 @@ Two clients must use the server:
 
 One task, one server, two hosts. If the task works in one and not the other, the presentation says why.
 
+A server that runs on your own machine and is started by each host over stdio meets this requirement. Hosting the server remotely is not required.
+
 Every team member must be able to explain every part of the submission. That is checked in the presentation and again in the Comprehension Defense.
 
 ## The chain is the submission

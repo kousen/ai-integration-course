@@ -64,3 +64,7 @@ Major project submissions are Git repositories you own, created from the [artifa
 **[Week 8](weeks/08/README.md)** — Tool use and function calling: the model asks, the program decides. The schema, the four messages, the loop with its cap, the three failure modes (the bad call, the endless loop, the hallucinated tool or result) and the plain code that catches each, side effects and permission. One real tool for the portfolio chatbot, its misuse cases tested with a scripted model. Team Project 2 assigned.
 
 [Setup additions](weeks/08/setup.md) · [Lab](weeks/08/lab.md) · [Slides](slides/week08.md) · [Slides (PDF)](slides/week08.pdf) · [Submission](assignments/week08-tool.md) · [Team Project 2](assignments/team-project-2.md) · [Tool loop](examples/tool-loop/)
+
+**[Week 9](weeks/09/README.md)** — The Model Context Protocol: last week's tool schema, standardized so any host can discover and call it. Host, client, and server over stdio; a Python server whose schemas come from type hints; the same server used by a host with no model and by Claude Code; what the server holds (the credential) and what it cannot see (the user); when a server and when a skill. The lab is each team's own server, one tool per member, and is Team Project 2's Build milestone.
+
+[Lab](weeks/09/lab.md) · [Slides](slides/week09.md) · [Slides (PDF)](slides/week09.pdf) · [Submission](assignments/week09-mcp-server.md) · [MCP server](examples/mcp-server/)
