@@ -17,7 +17,7 @@ One task, one server, two hosts. If the task works in one and not the other, the
 
 A server that runs on your own machine and is started by each host over stdio meets this requirement.
 
-**Deployment is a stretch goal with a reward** (decided in class, November 16). A project whose server runs only on localhost can earn at most a B+. A project whose server is deployed on a real host, so that both hosts reach it by URL over streamable HTTP, can earn an A- or higher. GitHub Pages serves static sites only and will not run a server; Cloudflare is one platform that will.
+**Deployment is a stretch goal with a reward** (decided in class, November 16). A project whose server runs only on localhost can earn at most a B+. A project whose server is deployed on a real host, so that both hosts reach it by URL over streamable HTTP, can earn an A- or higher. GitHub Pages serves static sites only and will not run a server; Cloudflare is one platform that will. A server with a public URL needs what any web service needs: a check on who is calling (a bearer token or the platform's access control) and a spending cap.
 
 Every team member must be able to explain every part of the submission. That is checked in the presentation and again in the Comprehension Defense.
 

@@ -12,7 +12,7 @@ The agent built here is the second host that [Team Project 2](team-project-2.md)
 
 - `plan.md` with a "Week 10: the agent" section approved before the first code commit: the two decisions chosen and why the task needs them, the values of the step cap and the cost cap, and Proof listing every way a run can end with the test that covers it.
 - `agent.py`: your own loop, with no agent framework. It discovers the tools from the team's server and does not import them. It has a step cap, a cost cap, and the two decisions from the plan. If the server has a tool that changes something, one of the two is an approval gate.
-- `tests/test_agent.py`: at least six no-key tests with a scripted model and the real server in memory (the baseline, each cap, each decision), committed before `agent.py`.
+- `tests/test_agent.py`: at least six no-key tests with a scripted model and the real server in memory (the baseline, each cap, each decision; an approval gate needs two, and without one a second case for one decision makes six), committed before `agent.py`.
 - `CHECKS.md` with a Week 10 section: the table of runs on two models (stopped by, steps, cost, right or not), one row for each cap tripped on purpose, one full trace, and the three findings.
 - `openrouter` under Dependencies in `spec.md`, with its reason.
 
