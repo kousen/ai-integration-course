@@ -131,7 +131,7 @@ cap of four and nothing else.
 | 5 | asks a **person** before anything that changes the world | `--approve` |
 | 6 | **stops**: a step cap and a cost cap | `--max-steps`, `--max-cost` |
 
-<div class="note">examples/agent-loop/agent.py · about 170 lines · no framework · 13 tests with no key</div>
+<div class="note">examples/agent-loop/agent.py · about 220 lines · no framework · 37 tests with no key</div>
 
 <!--
 1:50–1:56. Open agent.py and scroll once so they see the size. Each number
@@ -167,7 +167,7 @@ reads was written by the program, not the model. Same rule as Week 8.
 
 ```bash
 cd examples/agent-loop
-python3 -m pytest tests -q          # 13 passed, no key
+python3 -m pytest tests -q          # 37 passed, no key
 python3 agent.py "What did Sam learn from the receipt reader project?"
 ```
 
@@ -177,7 +177,7 @@ step=1  tool='lookup_project'  arguments='{"name": "receipt reader"}'  result=�
 stopped_by=answer  steps=2  cost=$0.000467  [minimax/minimax-m3]
 ```
 
-- No flags: this is last week's `host.py`. It starts `../mcp-server/server.py` and discovers three tools.
+- No flags: last week's `host.py` loop, with the gate, the repeat rule, and the caps always on. It starts `../mcp-server/server.py` and discovers three tools.
 - Two steps, because delivering a tool result costs a second call.
 
 <!--
@@ -254,12 +254,12 @@ was sent, that is the finding: say so and move on.
 # 2. Revise: errors are results
 
 ```python
-if (name, raw) in failed:                       # the same failing call, again
-    return done(f"I stopped: {name} failed and was asked for again unchanged.", "repeat", step)
+if (name, raw) in failed:                       # the same failed or denied call, again
+    return done(f"I stopped: {name} failed or was denied and was asked for again unchanged.", "repeat", step)
 ...
 if result.is_error:
     text = "ERROR: " + text
-if text.startswith("ERROR"):
+if text.startswith(("ERROR", "DENIED")):
     failed.add((name, raw))
 ```
 
@@ -320,12 +320,12 @@ enough for a budget. They saw the token meter in Week 1.
 # 3. A budget, and notes when it fills
 
 ```python
-if budget and size(messages) > budget:
-    messages, c = compact(llm, model, messages)       # one more billed call
+if budget and len(messages) > keep + 1 and size(messages) > budget:
+    messages, c = compact(llm, model, messages, keep)     # one more billed call, then the cost cap again
 ```
 
 ```python
-return messages[:2] + [notes], cost      # system, task, "Notes so far: …"
+return messages[:keep] + [notes], cost   # system, task, the plan if any, "Notes so far: …"
 ```
 
 - Everything after the task is replaced by notes the model writes about its own work.
@@ -410,9 +410,9 @@ goes back. Nothing was learned; something was read.
 # 5. Approval: a person decides
 
 ```python
-GATED = {"request_intro"}      # tools that change something
+READ_ONLY = {"recent_commits", "lookup_project"}   # any tool NOT named here needs a person's yes
 
-elif name in GATED and not (approve and approve(name, args)):
+elif not (name in READ_ONLY or (ours and not approve) or (approve and approve(name, args))):
     text = "DENIED: a person did not approve this call. It was not done; do not retry."
 ```
 
@@ -453,9 +453,9 @@ again what they said at 2:05.
 ```python
 for step in range(1, max_steps + 1):
     if cost >= max_cost:                 # checked before every billed call
-        return done(f"I stopped: this task reached its ${max_cost} budget.", "cost", step - 1)
+        return over_budget(step)         # "I stopped: this task reached its $0.05 budget."
     ...
-return done(f"I stopped: the task was not finished in {max_steps} steps.", "steps", max_steps)
+return done(f"I stopped: the step limit ({max_steps}) was reached before the task was finished.", "steps", max_steps)
 ```
 
 - The step cap bounds time. The cost cap bounds money. A long result can make three steps cost more than ten.
@@ -524,7 +524,7 @@ Then: rm memory.json
 |---|---|---|
 | suggest only | plan mode | reads the plan and decides |
 | act, asking each time | default permissions | approves every change |
-| act, asking for some | `GATED` | approves what cannot be undone |
+| act, asking for some | `READ_ONLY` | approves everything that is not a read |
 | act alone | a scheduled job | reads the log afterward |
 
 - Private data, untrusted content, and a way to send data out: an agent with all three can be steered into leaking (Simon Willison's "lethal trifecta").
@@ -585,7 +585,7 @@ async def test_the_same_failing_call_twice_ends_the_run():
 
 - A scripted model says what the model "did". The assertion says what the program did about it.
 - The server is the real one, connected in memory. Only the model and GitHub are fake.
-- Every stopping rule and the gate are tested this way: 13 tests, under a second, no key.
+- Every stopping rule and the gate are tested this way: 37 tests, under a second, no key.
 
 <!--
 3:50–3:53. Week 8's FakeClient, with last week's Client(mcp) on the other
@@ -681,7 +681,7 @@ written in plan.md.
 - [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) (Anthropic): workflows and agents.
 - [The lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/) (Simon Willison).
 - [Introduction to Subagents](https://academy.claude.com/courses/introduction-to-subagents) · [Introduction to Agent Skills](https://academy.claude.com/courses/introduction-to-agent-skills) (one certificate due November 30).
-- `examples/agent-loop/`: `agent.py` and 13 no-key tests, built on `examples/mcp-server/` from Week 9. Rehearsed November 23, 2026 on `minimax/minimax-m3` and `xiaomi/mimo-v2.6-flash`.
+- `examples/agent-loop/`: `agent.py` and 37 no-key tests, built on `examples/mcp-server/` from Week 9. Rehearsed November 23, 2026 on `minimax/minimax-m3` and `xiaomi/mimo-v2.6-flash`.
 - Week 11 (November 30): skills, subagents, harnesses; the Maintain stage.
 
 </div>

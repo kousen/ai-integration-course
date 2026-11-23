@@ -28,12 +28,12 @@ GITHUB_TOOL = {"type": "function", "function": {
 
 
 def recent_commits(repo: str, count: int = 5) -> dict:
-    if not re.fullmatch(r"[\w.-]+/[\w.-]+", repo or ""):
-        return {"error": f"repo must be owner/name, got {repo!r}"}
+    if not re.fullmatch(r"[\w.-]+/[\w.-]+", repo or "", re.ASCII) or any(not part.strip(".") for part in repo.split("/")):
+        return {"error": f"repo must be owner/name, got {repo!r}"}       # no "..": the path stays under /repos/owner/name
     count = max(1, min(int(count), 10))
     req = urllib.request.Request(f"https://api.github.com/repos/{repo}/commits?per_page={count}",
                                  headers={"Accept": "application/vnd.github+json", "User-Agent": "cpsc415-tool-loop"})
-    if os.environ.get("GITHUB_TOKEN"):
+    if os.environ.get("GITHUB_TOKEN"):     # the model chooses `repo`, so use a token with no private-repository scope
         req.add_header("Authorization", f"Bearer {os.environ['GITHUB_TOKEN']}")
     try:
         with urllib.request.urlopen(req, timeout=20) as resp:

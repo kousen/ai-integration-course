@@ -1,13 +1,15 @@
 """An agent from scratch: Week 9's host.py, plus the six things that make a loop an agent.
 
     export OPENROUTER_API_KEY=...
-    python3 agent.py "What did Sam learn from the receipt reader project?"          # host.py again
+    TASK="..."                                         # the three-tool task; the README defines it
+    python3 agent.py "What did Sam learn from the receipt reader project?"          # host.py's loop; the gate, repeat rule, and caps are always on
     python3 agent.py "$TASK" --plan                    # 1. say the plan before acting
     python3 agent.py "Latest commits in kousen/no-such-repo-here?"                  # 2. errors come back; a repeat stops
     python3 agent.py "$TASK" --budget 2500             # 3. a context budget; older steps are summarized
     python3 agent.py "Remember that I prefer short answers." --memory               # 4. notes that outlive the run
     python3 agent.py "$TASK" --approve                 # 5. a person approves anything that changes something
-    python3 agent.py "$TASK" --max-steps 1 --max-cost 0.0002                        # 6. two caps the model cannot raise
+    python3 agent.py "$TASK" --max-steps 1             # 6. two caps the model cannot raise,
+    python3 agent.py "$TASK" --max-cost 0.0002         #    one at a time: together, only the step cap trips
 
 No framework. The model still only asks; every decision below is an `if` in this file.
 The tools come from an MCP server (default: ../mcp-server/server.py, the Week 9 example), so
@@ -33,7 +35,9 @@ SYSTEM = ("You complete the user's task with the tools provided. Answer only fro
           "Two or three plain sentences at the end.")
 PLAN = ("Before using any tool, write a numbered plan of at most four steps for this task and "
         "name the tool each step needs. Do not answer the task yet. The tools are:\n")
-GATED = {"request_intro"}      # tools that change something: a person decides, not the model
+READ_ONLY = {"recent_commits", "lookup_project"}   # 5. tools that only read. Any tool NOT named here needs a person's yes.
+MAX_CALLS, MAX_RESULT, MAX_NOTES = 8, 4000, 20     # tool calls run per reply; characters kept per result; notes kept
+UNKNOWN_COST = 0.01                                # 6. charged when a reply reports no cost, so the cost cap still ends the run
 
 # 4. Memory is a tool this host offers itself. The server never sees it.
 REMEMBER = {"type": "function", "function": {
@@ -56,14 +60,24 @@ def ask(llm, model, messages, tools=None):
     if model in REASONING:
         kwargs["reasoning"] = REASONING[model]
     c = llm.chat.send(**kwargs)
-    return c.choices[0].message, getattr(c.usage, "cost", None) or 0.0
+    cost = getattr(c.usage, "cost", None)
+    if cost is None:               # no cost reported is not the same as free
+        print(f"warning: the reply reported no cost; charging ${UNKNOWN_COST}", file=sys.stderr)
+        cost = UNKNOWN_COST
+    return c.choices[0].message, cost
 
 
-def compact(llm, model, messages):
-    """3. Replace everything after the task with notes the model writes. Returns (messages, cost).
+def clean(note) -> str:
+    """4. One line, at most 200 characters, on the way in and on the way out of memory.json."""
+    return " ".join(str(note).split())[:200]
+
+
+def compact(llm, model, messages, keep=2):
+    """3. Replace everything after the first `keep` messages (the task, and the plan if there is one)
+    with notes the model writes. Returns (messages, cost).
     Called only between steps, so no tool request is ever separated from its result."""
     transcript = "\n".join(f"{m['role']}: {m.get('content') or json.dumps(m.get('tool_calls'))}"
-                           for m in messages[2:])
+                           for m in messages[keep:])
     msg, cost = ask(llm, model, [
         {"role": "system", "content": "You compress an agent's working transcript into notes."},
         {"role": "user", "content": f"Task: {messages[1]['content']}\n\nTranscript:\n{transcript}\n\n"
@@ -71,7 +85,7 @@ def compact(llm, model, messages):
                                     "names, numbers, and errors. Nothing else."}])
     notes = {"role": "user", "content": "Notes so far (earlier steps were summarized to save context):\n"
                                         f"{(msg.content or '').strip()}\nContinue the task."}
-    return messages[:2] + [notes], cost
+    return messages[:keep] + [notes], cost
 
 
 async def run(task: str, model: str, server, llm=None, *, plan=False, max_steps=6, max_cost=0.05,
@@ -90,8 +104,18 @@ async def run(task: str, model: str, server, llm=None, *, plan=False, max_steps=
     def done(answer, stopped_by, step):
         return {"answer": answer, "stopped_by": stopped_by, "steps": step, "cost": round(cost, 6), "trace": trace}
 
-    system = SYSTEM
-    notes = json.loads(memory.read_text()) if memory and memory.exists() else []
+    def over_budget(step):
+        return done(f"I stopped: this task reached its ${max_cost} budget.", "cost", step - 1)
+
+    system, notes = SYSTEM, []
+    if memory and memory.exists():
+        try:
+            notes = json.loads(memory.read_text())
+        except json.JSONDecodeError:
+            notes = None
+        if not isinstance(notes, list):        # stop before any billed call, and leave the file as it is
+            raise ValueError(f"{memory} is not a JSON list of notes. Fix it or delete it.")
+        notes = [clean(n) for n in notes][-MAX_NOTES:]
     if notes:      # 4. loaded as text the model reads: it can be stale or wrong, so the prompt says so
         system += "\nNotes saved in earlier runs (they may be out of date):\n" + "\n".join(f"- {n}" for n in notes)
     messages = [{"role": "system", "content": system}, {"role": "user", "content": task}]
@@ -111,15 +135,18 @@ async def run(task: str, model: str, server, llm=None, *, plan=False, max_steps=
             note(plan=(msg.content or "").strip())
             messages += [{"role": "assistant", "content": msg.content or ""},
                          {"role": "user", "content": "Carry out the plan. If a step fails, say what you will change."}]
+        keep = len(messages)       # the task, and the plan if there is one: never summarized
 
         for step in range(1, max_steps + 1):
             if cost >= max_cost:                                    # 6. checked before every billed call
-                return done(f"I stopped: this task reached its ${max_cost} budget.", "cost", step - 1)
-            if budget and size(messages) > budget:                  # 3.
+                return over_budget(step)
+            if budget and len(messages) > keep + 1 and size(messages) > budget:     # 3. only when there are steps to summarize
                 before = size(messages)
-                messages, c = compact(llm, model, messages)
+                messages, c = compact(llm, model, messages, keep)
                 cost += c
                 note(step=step, compacted=f"{before} -> {size(messages)} characters")
+                if cost >= max_cost:                                # 6. the summary was a billed call too
+                    return over_budget(step)
             msg, c = ask(llm, model, messages, tools)
             cost += c
             if not msg.tool_calls:
@@ -128,26 +155,34 @@ async def run(task: str, model: str, server, llm=None, *, plan=False, max_steps=
                              "tool_calls": [{"id": tc.id, "type": "function",
                                              "function": {"name": tc.function.name, "arguments": tc.function.arguments}}
                                             for tc in msg.tool_calls]})
-            for tc in msg.tool_calls:
+            for i, tc in enumerate(msg.tool_calls):
                 name, raw = tc.function.name, tc.function.arguments or "{}"
-                if (name, raw) in failed:                           # 2. the same failing call, again
-                    return done(f"I stopped: {name} failed and was asked for again unchanged.", "repeat", step)
+                if (name, raw) in failed:                           # 2. the same failed or denied call, again
+                    return done(f"I stopped: {name} failed or was denied and was asked for again unchanged.", "repeat", step)
                 try:
                     args = json.loads(raw)
-                    if name == "remember" and memory:               # 4.
-                        notes.append(str(args["note"])[:200])
+                    if not isinstance(args, dict):
+                        raise TypeError("the arguments must be a JSON object")
+                    ours = name == "remember" and memory            # 4. the host's own tool; --memory is the user's opt-in
+                    if i >= MAX_CALLS:                              # 6. a step is one reply, so the calls in it are capped too
+                        text = f"NOT RUN: more than {MAX_CALLS} tool calls in one reply. Ask again in the next step."
+                    elif not (name in READ_ONLY or (ours and not approve) or (approve and approve(name, args))):     # 5.
+                        text = "DENIED: a person did not approve this call. It was not done; do not retry."
+                    elif ours:
+                        notes.append(clean(args["note"]))
+                        del notes[:-MAX_NOTES]
                         memory.write_text(json.dumps(notes, indent=1))
                         text = "saved"
-                    elif name in GATED and not (approve and approve(name, args)):     # 5.
-                        text = "DENIED: a person did not approve this call. It was not done; do not retry."
                     else:
                         result = await mcp.call_tool(name, args)
                         text = result.content[0].text if result.content else ""
+                        if len(text) > MAX_RESULT:                  # every later call is billed for this text again
+                            text = text[:MAX_RESULT] + " ...[truncated]"
                         if result.is_error:
                             text = "ERROR: " + text
-                except (json.JSONDecodeError, KeyError) as e:
+                except (json.JSONDecodeError, KeyError, TypeError) as e:
                     text = f"ERROR: bad arguments: {e}"
-                if text.startswith("ERROR"):
+                if text.startswith(("ERROR", "DENIED")):
                     failed.add((name, raw))
                 note(step=step, tool=name, arguments=raw, result=text)
                 messages.append({"role": "tool", "tool_call_id": tc.id, "content": text})
@@ -155,18 +190,22 @@ async def run(task: str, model: str, server, llm=None, *, plan=False, max_steps=
 
 
 def ask_person(name, args) -> bool:
-    return input(f"\nThe agent wants to run {name}({json.dumps(args)}). Allow? [y/N] ").strip().lower().startswith("y")
+    try:
+        return input(f"\nThe agent wants to run {name}({json.dumps(args)}). Allow? [y/N] ").strip().lower().startswith("y")
+    except EOFError:               # nobody at the keyboard is a no
+        return False
 
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("task")
-    p.add_argument("--model", default=os.environ.get("CHAT_MODEL", "minimax/minimax-m3"))
+    p.add_argument("--model", default=os.environ.get("CHAT_MODEL", "minimax/minimax-m3"),
+                   help="default: $CHAT_MODEL if it is set, otherwise minimax/minimax-m3")
     p.add_argument("--server", default=None, help="URL of an HTTP MCP server, or a path to a server.py; default is ../mcp-server/server.py")
     p.add_argument("--plan", action="store_true")
     p.add_argument("--budget", type=int, help="characters of conversation before older steps are summarized")
     p.add_argument("--memory", action="store_true", help="load and save notes in memory.json")
-    p.add_argument("--approve", action="store_true", help="ask before running a gated tool (default: deny)")
+    p.add_argument("--approve", action="store_true", help="ask before running any tool not in READ_ONLY (default: deny)")
     p.add_argument("--max-steps", type=int, default=6)
     p.add_argument("--max-cost", type=float, default=0.05, help="dollars")
     a = p.parse_args()

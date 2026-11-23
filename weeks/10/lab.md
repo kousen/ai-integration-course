@@ -67,7 +67,7 @@ no network. Cover: one tool call then an answer; the step cap; the cost
 cap; and each of our two decisions. Run them so I see them fail, then stop.
 ```
 
-At least **six tests**: the baseline, one for each cap, and at least one for each of your two decisions (an approval gate needs two: denied and approved). In each test, the script says what the model "did" and the assertions say what the program did about it.
+At least **six tests**: the baseline, one for each cap, and at least one for each of your two decisions (an approval gate needs two: denied and approved). If neither decision is the approval gate, that list is five: make the sixth a second case for one of your decisions, such as the same successful call twice not ending the run. In each test, the script says what the model "did" and the assertions say what the program did about it.
 
 Commit the failing tests: `git commit -m "Agent: tests, failing"`.
 
@@ -77,7 +77,8 @@ Commit the failing tests: `git commit -m "Agent: tests, failing"`.
 Implement agent.py so the tests pass. Start from
 examples/agent-loop/agent.py and keep only the decisions in our plan. It
 connects to our server.py, discovers the tools, and never imports them.
-Put the names of our side-effect tools in GATED. Run the tests and show me
+Put the names of our tools that only read in READ_ONLY, so that every
+other tool needs a person's yes. Run the tests and show me
 the output.
 ```
 
@@ -121,4 +122,4 @@ One tag for the team, and one Moodle submission for the team.
 
 ## If you are blocked
 
-Say so early. The usual problems: the agent cannot start the server (run `python3 server.py` yourself from the repository root and read the error; activate the virtual environment first); the model answers without calling any tool (the system prompt must say to answer only from tool results, and the tool docstrings must say when to call them); the reply is empty on `xiaomi/mimo-v2.6-flash` (hidden reasoning must be off for that model: keep the `REASONING` table); the step cap trips on every run (print the trace and look for a call repeated with the same arguments); a test hangs or calls the network (the FakeLLM ran out of replies, or a tool was not faked); `KeyError: OPENROUTER_API_KEY` (the key is not set in this terminal).
+Say so early. The usual problems: the agent cannot start the server (run `python3 server.py` yourself from the repository root and read the error; activate the virtual environment first); the model answers without calling any tool (the system prompt must say to answer only from tool results, and the tool docstrings must say when to call them); the reply is empty on `xiaomi/mimo-v2.6-flash` (hidden reasoning must be off for that model: keep the `REASONING` table); the step cap trips on every run (print the trace and look for a call repeated with the same arguments); a test fails with `the agent asked the model again after the script ran out` (the FakeLLM needs one more reply, or the loop should have stopped); a test calls the network (a tool was not faked); `KeyError: OPENROUTER_API_KEY` (the key is not set in this terminal).
