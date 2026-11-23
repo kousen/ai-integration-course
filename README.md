@@ -68,3 +68,7 @@ Major project submissions are Git repositories you own, created from the [artifa
 **[Week 9](weeks/09/README.md)** — The Model Context Protocol: last week's tool schema, standardized so any host can discover and call it. Host, client, and server over stdio; a Python server whose schemas come from type hints; the same server used by a host with no model and by Claude Code; what the server holds (the credential) and what it cannot see (the user); when a server and when a skill. The lab is each team's own server, a team submission, and is Team Project 2's Build milestone.
 
 [Lab](weeks/09/lab.md) · [Slides](slides/week09.md) · [Slides (PDF)](slides/week09.pdf) · [Submission](assignments/week09-mcp-server.md) · [MCP server](examples/mcp-server/)
+
+**[Week 10](weeks/10/README.md)** — Agents from scratch: last week's host grown into an agent with no framework, by six decisions the program makes. A plan before any tool; errors returned so the model can revise, and a stop when it repeats a failing call; a context budget with summarizing; memory between runs; a person's approval before anything that changes the world; a step cap and a cost cap. Every one tested with a scripted model and no key, then found by name in Claude Code. The lab is each team's own agent connected to its server: Team Project 2's second host.
+
+[Lab](weeks/10/lab.md) · [Slides](slides/week10.md) · [Slides (PDF)](slides/week10.pdf) · [Submission](assignments/week10-agent.md) · [Agent loop](examples/agent-loop/)
