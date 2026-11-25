@@ -20,7 +20,7 @@ By the end of the session, you should be able to:
 1. [Lab: Your team's agent, the second host](lab.md) (homework; started in class; due November 30)
 2. [Week 10 slides (PDF)](../../slides/week10.pdf) · [Slide source](../../slides/week10.md)
 3. [Week 10 submission requirements](../../assignments/week10-agent.md)
-4. [The agent loop example](../../examples/agent-loop/): `agent.py` and 37 no-key tests
+4. [The agent loop example](../../examples/agent-loop/): `agent.py` and 40 no-key tests
 5. [Team Project 2: Agentic / MCP System](../../assignments/team-project-2.md), due December 7
 
 Setup is the same as last week: a virtual environment with `pip install mcp openrouter pytest`.

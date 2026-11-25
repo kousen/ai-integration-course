@@ -131,7 +131,7 @@ cap of four and nothing else.
 | 5 | asks a **person** before anything that changes the world | `--approve` |
 | 6 | **stops**: a step cap and a cost cap | `--max-steps`, `--max-cost` |
 
-<div class="note">examples/agent-loop/agent.py · about 220 lines · no framework · 37 tests with no key</div>
+<div class="note">examples/agent-loop/agent.py · about 220 lines · no framework · 40 tests with no key</div>
 
 <!--
 1:50–1:56. Open agent.py and scroll once so they see the size. Each number
@@ -167,7 +167,7 @@ reads was written by the program, not the model. Same rule as Week 8.
 
 ```bash
 cd examples/agent-loop
-python3 -m pytest tests -q          # 37 passed, no key
+python3 -m pytest tests -q          # 40 passed, no key
 python3 agent.py "What did Sam learn from the receipt reader project?"
 ```
 
@@ -585,7 +585,7 @@ async def test_the_same_failing_call_twice_ends_the_run():
 
 - A scripted model says what the model "did". The assertion says what the program did about it.
 - The server is the real one, connected in memory. Only the model and GitHub are fake.
-- Every stopping rule and the gate are tested this way: 37 tests, under a second, no key.
+- Every stopping rule and the gate are tested this way: 40 tests, under a second, no key.
 
 <!--
 3:50–3:53. Week 8's FakeClient, with last week's Client(mcp) on the other
@@ -681,7 +681,7 @@ written in plan.md.
 - [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) (Anthropic): workflows and agents.
 - [The lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/) (Simon Willison).
 - [Introduction to Subagents](https://academy.claude.com/courses/introduction-to-subagents) · [Introduction to Agent Skills](https://academy.claude.com/courses/introduction-to-agent-skills) (one certificate due November 30).
-- `examples/agent-loop/`: `agent.py` and 37 no-key tests, built on `examples/mcp-server/` from Week 9. Rehearsed November 23, 2026 on `minimax/minimax-m3` and `xiaomi/mimo-v2.6-flash`.
+- `examples/agent-loop/`: `agent.py` and 40 no-key tests, built on `examples/mcp-server/` from Week 9. Rehearsed November 23, 2026 on `minimax/minimax-m3` and `xiaomi/mimo-v2.6-flash`.
 - Week 11 (November 30): skills, subagents, harnesses; the Maintain stage.
 
 </div>
