@@ -17,7 +17,16 @@ One task, one server, two hosts. If the task works in one and not the other, the
 
 A server that runs on your own machine and is started by each host over stdio meets this requirement.
 
-**Deployment is a stretch goal with a reward** (decided in class, November 16). A project whose server runs only on localhost can earn at most a B+. A project whose server is deployed on a real host, so that both hosts reach it by URL over streamable HTTP, can earn an A- or higher. GitHub Pages serves static sites only and will not run a server; Cloudflare is one platform that will. A server with a public URL needs what any web service needs: a check on who is calling (a bearer token or the platform's access control) and a spending cap.
+**Deployment is a stretch goal with a reward** (decided in class, November 16). A project whose server runs only on localhost can earn at most a B+. A project whose server is deployed on a real host, so that both hosts reach it by URL over streamable HTTP, can earn an A- or higher. A server with a public URL needs what any web service needs: a check on who is calling (a bearer token or the platform's access control) and a spending cap.
+
+**Where a Python server runs** (the Week 9 example server, tested November 23–25, 2026; this replaces an earlier line here that named Cloudflare):
+
+- **Railway** runs it as an ordinary Python process that stays up. All three tools worked, including the one that writes a file. Its pricing page (read November 23) lists a free plan with $1 of usage a month, no credit card, and services that sleep when idle; check the current terms before you rely on them.
+- **Vercel** runs the same folder as a function started for each request. The two read-only tools worked. The tool that writes a file failed, because the file system there is read-only: a server that records anything needs a database or key-value store on Vercel. Deploy to production (`--prod`): preview URLs can sit behind Vercel's own login.
+- **Cloudflare:** its guide for remote MCP servers is written for TypeScript. In a local test of its Python Workers runtime the example server did not get past its second request, so it is not a quick route for this project's Python server.
+- **GitHub Pages** serves static files only and will not run a server.
+
+On both Railway and Vercel the deployed folder held the server's Python files, a `requirements.txt`, and an `app.py` that exposes the server as a web application with a stateless transport and a bearer-token check; Week 11 walks through it. Any other host that runs a Python web application is acceptable. Name your host and the reason in `spec.md`, as for any other dependency.
 
 Every team member must be able to explain every part of the submission. That is checked in the presentation and again in the Comprehension Defense.
 
@@ -31,8 +40,8 @@ Submitted as a full artifact chain, as Team Project 1 was. Working code with no 
 | Design | `spec.md`: the task; the server's tools with their schemas; two decisions per component, **language** and **model**, with the alternative considered; every dependency under Dependencies with its reason | November 16, with the intent |
 | Build | `plan.md`: files, order, risks, Proof; the server running and registered in Claude Code (the Week 9 lab) | **November 23** (Week 10) |
 | Test | No-key tests for every tool's misuse cases (the Week 8 pattern); the billed eval of the task on two models; the side-effect tools gated | November 23 |
-| Deploy | At least one reviewed pull request per team member with a `REVIEW.md` pass from a separate reviewing agent; the eval in CI (the Week 11 lab); a skill packaged from the team's reusable workflow | **November 30** (Week 11) |
-| Maintain | `CLAUDE.md` current; `ANNOTATION.md` with the four questions per component; the cost ledger | December 7, with the final submission |
+| Deploy | At least one reviewed pull request per team member with a `REVIEW.md` pass from a separate reviewing agent | **November 30** (Week 11) |
+| Maintain | The eval in CI and a skill packaged from the team's reusable workflow (the Week 11 lab, taught November 30; moved here from the Deploy row on November 25); `CLAUDE.md` current; `ANNOTATION.md` with the four questions per component; the cost ledger | December 7, with the final submission |
 
 Milestones before December 7 are checked in class and get feedback, not grades.
 

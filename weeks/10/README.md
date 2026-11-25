@@ -40,7 +40,7 @@ Setup is the same as last week: a virtual environment with `pip install mcp open
 ## Team Project 2 dates
 
 - **Presentations are in class on Monday, December 7 (Week 12)**, the same day the project is due at 1:30 PM. Ten minutes per team plus five for questions, order drawn at the start of class.
-- **November 30 (Week 11):** the Deploy milestone and this week's lab.
+- **November 30 (Week 11):** the Deploy milestone (a reviewed pull request per member) and this week's lab. The eval in CI and the packaged skill are the Week 11 lab, due December 7 with the project.
 - December 14 (Week 13) is portfolio walkthroughs, not Team Project 2.
 
 ## Due today at 1:30 PM
@@ -54,7 +54,7 @@ Setup is the same as last week: a virtual environment with `pip install mcp open
 
 - The [Week 10 submission](../../assignments/week10-agent.md): the lab, in your team's TP2 repository, tag `week10-submitted`. One submission and one grade per team.
 - The [Introduction to Subagents](https://academy.claude.com/courses/introduction-to-subagents) **or** [Introduction to Agent Skills](https://academy.claude.com/courses/introduction-to-agent-skills) certificate, uploaded to Moodle. Your choice of the two.
-- **Team Project 2 milestone:** Deploy. See the [TP2 sheet](../../assignments/team-project-2.md).
+- **Team Project 2 milestone:** Deploy, which is one reviewed pull request per team member. See the [TP2 sheet](../../assignments/team-project-2.md).
 
 ### Reading and viewing to support the work
 
