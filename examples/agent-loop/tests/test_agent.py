@@ -370,3 +370,26 @@ async def test_a_budget_smaller_than_the_task_does_not_summarize_nothing():
     llm = FakeLLM(says("Hi."))
     await run("hello", M, server.mcp, llm, budget=1)
     assert len(llm.sent) == 1
+
+
+
+def test_a_url_is_passed_through_when_there_is_no_token(monkeypatch):
+    monkeypatch.delenv("MCP_TOKEN", raising=False)
+    assert agent.connect_to("http://localhost:8000/mcp") == "http://localhost:8000/mcp"
+
+
+def test_a_token_in_the_environment_is_sent_as_a_bearer_header(monkeypatch):
+    seen = {}
+    monkeypatch.setenv("MCP_TOKEN", "s3cret")
+    monkeypatch.setattr(agent, "streamable_http_client", lambda url, http_client: seen.update(url=url, http=http_client))
+    agent.connect_to("https://example.test/mcp")
+    assert seen["url"] == "https://example.test/mcp"
+    assert seen["http"].headers["authorization"] == "Bearer s3cret"
+
+
+def test_a_refusal_is_found_inside_nested_groups():
+    from mcp import MCPError
+    wrapped = ExceptionGroup("outer", [ExceptionGroup("inner", [MCPError(-32000, "Server returned an error response")])])
+    assert agent.refused(wrapped)
+    assert not agent.refused(ExceptionGroup("outer", [ValueError("something else")]))
+    assert not agent.refused(KeyError("OPENROUTER_API_KEY"))

@@ -8,7 +8,9 @@ server.py            three tools and one resource, about 80 lines; the schemas c
 client.py            a host with no model: start the server, list the tools, call two
 host.py              a host with a model: Week 8's loop, with the tools discovered from the server
 .mcp.json            registers the server with Claude Code for this project
+app.py               the same server as a deployable web service: $PORT, a bearer token, a stateless transport
 tests/test_server.py 9 no-key tests through the real protocol, in memory
+tests/test_app.py    6 no-key tests of the deployable app: the token gate, and the tools behind it
 ```
 
 Uses the official `mcp` Python SDK, version 2 (checked with 2.3.0 on November 16, 2026). Older tutorials import `FastMCP` from `mcp.server.fastmcp`; version 2 renamed it to `MCPServer` in `mcp.server`.
@@ -62,6 +64,50 @@ claude mcp add --transport http portfolio-http http://localhost:8000/mcp     # t
 ```
 
 Nothing about the tools changed. Over stdio each host starts its own copy of the server; over HTTP you start it once and hosts connect by URL, which is how hosted servers such as [Context7](https://context7.com/) (current library documentation, free with an API key) are offered. A server with a public URL needs what any web service needs: authentication and a spending cap.
+
+## Deploy it
+
+`app.py` is the same server as a web application a hosting platform can run. `server.py` does not change. Three things do:
+
+- **The platform chooses the port, and the address is public.** `app.py` listens on `0.0.0.0` and on `$PORT`. It also passes `host="0.0.0.0"` to the SDK, which otherwise rejects requests addressed to a public hostname.
+- **Every request carries a bearer token.** `app.py` refuses to start without `MCP_TOKEN`, and answers 401 to a request without it. Generate one with `python3 -c "import secrets; print(secrets.token_urlsafe(32))"`, give it to the platform as a secret, and never commit it.
+- **The transport is stateless.** A platform may restart the process, put it to sleep, or start a new copy for each request, so nothing about a conversation is kept in memory.
+
+Try it on your own machine first:
+
+```bash
+export MCP_TOKEN=$(python3 -c "import secrets; print(secrets.token_urlsafe(32))")
+python3 app.py                                              # leave it running
+python3 host.py "Which projects does Sam have on record?" --server http://localhost:8000/mcp
+```
+
+`host.py` and `../agent-loop/agent.py` send `MCP_TOKEN` as a bearer token when it is set. Open a terminal without it and run the same command: the server answers 401, and the host tells you to set the token.
+
+A platform needs one folder that holds everything the server imports. This example borrows its tools from `../tool-loop`, so gather them:
+
+```bash
+mkdir deploy && cp app.py server.py requirements.txt ../tool-loop/tools.py ../tool-loop/github_tool.py ../tool-loop/profile.json deploy/
+```
+
+Your team's server probably already lives in one folder; then you add only `app.py`. Tested with that folder on November 23–25, 2026:
+
+| | Railway | Vercel |
+|---|---|---|
+| How it runs the folder | `python app.py`, a process that stays up | finds `app` in `app.py` and runs it for each request |
+| Commands used | `railway init`, `railway add --service NAME --variables "MCP_TOKEN=..."`, `railway up`, `railway domain` | `vercel link`, `vercel deploy --prod --env MCP_TOKEN=...` |
+| `lookup_project`, `recent_commits` | work | work |
+| `request_intro` (appends to a file) | works | fails: the file system is read-only |
+| Without the token | 401 | 401 |
+
+What the table means for your design: on Vercel a tool that records anything needs a database or key-value store, and on any platform a file next to your code disappears when you deploy again. Deploy to production on Vercel (`--prod`): preview URLs can sit behind Vercel's own login. Neither platform needed a configuration file.
+
+Then both hosts use the URL:
+
+```bash
+export MCP_TOKEN=...                                        # the same value the platform holds
+python3 host.py "Which projects does Sam have on record?" --server https://YOUR-HOST/mcp
+claude mcp add --transport http portfolio-live https://YOUR-HOST/mcp --header "Authorization: Bearer $MCP_TOKEN"
+```
 
 ## What to look at
 

@@ -13,7 +13,7 @@ Week 10's example. [`examples/mcp-server/host.py`](../mcp-server/host.py) from W
 
 ```
 agent.py             about 220 lines; `run` returns the answer, stopped_by, steps, cost, and a trace
-tests/test_agent.py  37 no-key tests: a scripted model on one side, the Week 9 server in memory on the other
+tests/test_agent.py  40 no-key tests: a scripted model on one side, the Week 9 server in memory on the other
 poisoned-*.json      two notes to copy over memory.json, for seeing what a planted note does
 ```
 
@@ -50,6 +50,7 @@ Add `--model xiaomi/mimo-v2.6-flash` to any of them for the second class model. 
 ```bash
 python3 agent.py "your task" --server ../../your-tp2-repo/server.py     # stdio: the agent starts it
 python3 agent.py "your task" --server http://localhost:8000/mcp         # or a URL
+MCP_TOKEN=... python3 agent.py "your task" --server https://YOUR-HOST/mcp   # deployed: the token is sent as a bearer header
 ```
 
 Nothing in `agent.py` names the portfolio tools except `READ_ONLY`. Put the names of your own tools that only read there. Every other tool, including one you add later and forget to list, is denied unless a person approves it: a forgotten name costs you a prompt, not an unapproved side effect.

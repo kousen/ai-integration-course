@@ -25,7 +25,9 @@ import os
 import pathlib
 import sys
 
-from mcp import Client, StdioServerParameters
+import httpx2
+from mcp import Client, MCPError, StdioServerParameters
+from mcp.client.streamable_http import streamable_http_client
 
 HERE = pathlib.Path(__file__).parent
 REASONING = {"xiaomi/mimo-v2.6-flash": {"enabled": False}}     # per-model, as in Weeks 8 and 9
@@ -189,6 +191,22 @@ async def run(task: str, model: str, server, llm=None, *, plan=False, max_steps=
         return done(f"I stopped: the step limit ({max_steps}) was reached before the task was finished.", "steps", max_steps)   # 6.
 
 
+def connect_to(url: str):
+    """A deployed server should want a token. If MCP_TOKEN is set, send it with every request."""
+    token = os.environ.get("MCP_TOKEN")
+    if not token:
+        return url
+    return streamable_http_client(url, http_client=httpx2.AsyncClient(
+        headers={"Authorization": f"Bearer {token}"}, timeout=30))
+
+
+def refused(e: BaseException) -> bool:
+    """True if the server answered with a protocol error, which is what a missing or wrong token
+    looks like from here. Errors raised inside the client arrive wrapped in groups, so look through them."""
+    inner = getattr(e, "exceptions", None)
+    return any(refused(x) for x in inner) if inner else isinstance(e, MCPError)
+
+
 def ask_person(name, args) -> bool:
     try:
         return input(f"\nThe agent wants to run {name}({json.dumps(args)}). Allow? [y/N] ").strip().lower().startswith("y")
@@ -201,7 +219,7 @@ if __name__ == "__main__":
     p.add_argument("task")
     p.add_argument("--model", default=os.environ.get("CHAT_MODEL", "minimax/minimax-m3"),
                    help="default: $CHAT_MODEL if it is set, otherwise minimax/minimax-m3")
-    p.add_argument("--server", default=None, help="URL of an HTTP MCP server, or a path to a server.py; default is ../mcp-server/server.py")
+    p.add_argument("--server", default=None, help="URL of an HTTP MCP server (MCP_TOKEN, if set, is sent as a bearer token), or a path to a server.py; default is ../mcp-server/server.py")
     p.add_argument("--plan", action="store_true")
     p.add_argument("--budget", type=int, help="characters of conversation before older steps are summarized")
     p.add_argument("--memory", action="store_true", help="load and save notes in memory.json")
@@ -210,11 +228,17 @@ if __name__ == "__main__":
     p.add_argument("--max-cost", type=float, default=0.05, help="dollars")
     a = p.parse_args()
     if a.server and a.server.startswith("http"):
-        target = a.server
+        target = connect_to(a.server)
     else:
         path = pathlib.Path(a.server) if a.server else HERE.parent / "mcp-server" / "server.py"
         target = StdioServerParameters(command=sys.executable, args=[path.name], cwd=str(path.resolve().parent))
-    r = asyncio.run(run(a.task, a.model, target, plan=a.plan, max_steps=a.max_steps, max_cost=a.max_cost,
-                        budget=a.budget, memory=HERE / "memory.json" if a.memory else None,
-                        approve=ask_person if a.approve else None))
+    try:
+        r = asyncio.run(run(a.task, a.model, target, plan=a.plan, max_steps=a.max_steps, max_cost=a.max_cost,
+                            budget=a.budget, memory=HERE / "memory.json" if a.memory else None,
+                            approve=ask_person if a.approve else None))
+    except Exception as e:
+        if not (a.server and a.server.startswith("http") and refused(e)):
+            raise
+        sys.exit(f"{a.server} answered with an error instead of a result. A deployed server does this when "
+                 "MCP_TOKEN is missing or wrong: set it to the value the server was started with.")
     print(f"\n{r['answer']}\n\nstopped_by={r['stopped_by']}  steps={r['steps']}  cost=${r['cost']:.6f}  [{a.model}]")
